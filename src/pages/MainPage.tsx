@@ -63,6 +63,42 @@ export default function MainPage({ setCondicional, username }: MainPageProps) {
       phone: '(63) 99264-5401',
       startTime: '20:30',
       evetplace: ' Espaço Unimed'
+    },
+    {
+      id: '16',
+      name: 'KHALID',
+      link: 'https://www.eventim.com.br/event/khalid-espaco-unimed-14573679/?affiliate=GG1',
+      street: 'R. Tagipuru, 795',
+      city: 'São Paulo',
+      state: 'São Paulo',
+      eventDate: ' 23/06/2022',
+      phone: '1188 - 1188',
+      startTime: '21:00',
+      evetplace: 'Espaço Unimed'
+    },
+    {
+      id: '17',
+      name: 'DUA LIPA',
+      link: 'https://www.eventim.com.br/event/dua-lipa-distrito-anhembi-15305543/',
+      street: 'Av. Olavo Fontoura, 1209',
+      city: 'São Paulo',
+      state: 'São Paulo',
+      eventDate: '08/09/2022',
+      phone: '2299-2299',
+      startTime: '21:00',
+      evetplace: 'Centro de Convenções - Anhembi'
+    },
+    {
+      id: '18',
+      name: 'Matuê',
+      link: 'https://espacoleste.com/matue-e-convidados23-de-janeiro-de-2022-domingo/',
+      street: 'Avenida Aricanduva, 12011',
+      city: 'São Paulo',
+      state: 'São Paulo',
+      eventDate: ' 10/06/2022',
+      phone: '1100-1100',
+      startTime: '22:00',
+      evetplace: 'Espaço Leste'
     }
   ];
 
@@ -102,6 +138,42 @@ export default function MainPage({ setCondicional, username }: MainPageProps) {
       phone: '(88) 98154-6236',
       startTime: '22:00',
       evetplace: 'Circo Voador'
+    },
+    {
+      id: '13',
+      name: 'Harry Styles: Love On Tour',
+      link: 'https://www.livenation.lat/show/1360006/harry-styles-love-on-tour/rio%20de%20janeiro/2022-12-08/pt',
+      street: 'Av. Embaixador Abelardo Bueno, 3401',
+      city: 'Rio de Janeiro',
+      state: 'Rio de Janeiro',
+      eventDate: ' 08/12/2022',
+      phone: '4488 - 4488',
+      startTime: '17:00',
+      evetplace: 'Classic Hall'
+    },
+    {
+      id: '14',
+      name: 'Avril Lavigne @ Rock in Rio',
+      link: 'https://www.festicket.com/pt/festivals/rock-in-rio-global-experience/2022/shop/?referrer=bandsintown&shared_from=partner_linkgen',
+      street: 'Av. Salvador Allende, 6500',
+      city: 'Rio de Janeiro',
+      state: 'Rio de Janeiro',
+      eventDate: '09/09/2022',
+      phone: '2211-2211',
+      startTime: '19:00',
+      evetplace: 'Parque dos Atletas'
+    },
+    {
+      id: '15',
+      name: 'Irmãos - Alexandre Pires e Seu Jorge',
+      link: 'https://www.eventoon.com.br/evento/alexandre-pires-e-seu-jorge-rio-de-janeiro-23-07-2022',
+      street: 'Av. Infante Dom Henrique, S/N',
+      city: 'Rio de Janeiro',
+      state: 'Rio de Janeiro',
+      eventDate: ' 23/07/2022',
+      phone: '1155-1155',
+      startTime: '19:00',
+      evetplace: 'BR Marinas - Marina da Glória'
     }
   ];
 
@@ -141,6 +213,42 @@ export default function MainPage({ setCondicional, username }: MainPageProps) {
       phone: '(27) 97463-1217',
       startTime: '21:00',
       evetplace: 'Classic Hall'
+    },
+    {
+      id: '10',
+      name: 'A-HA',
+      link: 'https://www.livepass.com.br/event/a-ha-classic-hall-14043234/',
+      street: ' Av. Gov. Agamenon Magalhães, S/N',
+      city: 'Recife',
+      state: 'Pernambuco',
+      eventDate: ' 13/7/2022',
+      phone: '9988 - 9988',
+      startTime: '20:00',
+      evetplace: 'Classic Hall'
+    },
+    {
+      id: '11',
+      name: 'ANAVITÓRIA | RECIFE | PE',
+      link: 'https://www.esfera.com.vc/p/anavitoria-turne-cor/e101075975',
+      street: 'Av. Prof. Andrade Bezerra, S/N',
+      city: 'Recife',
+      state: 'Pernambuco',
+      eventDate: '12/10/2022',
+      phone: '2233-2233',
+      startTime: '21:00',
+      evetplace: 'Teatro Guararapes'
+    },
+    {
+      id: '12',
+      name: 'Fresno no Recife | Clube Internacional do Recife| Turnê Vou Ter Que Me Virar',
+      link: 'https://www.sympla.com.br/evento/fresno-no-recife-clube-internacional-do-recife-turne-vou-ter-que-me-virar/806938',
+      street: ' R. Benfica, 505',
+      city: 'Recife',
+      state: 'Pernambuco',
+      eventDate: ' 14/08/2022',
+      phone: '4455-4455',
+      startTime: '01:00',
+      evetplace: 'Clube Internacional do Recife'
     }
   ];
 
