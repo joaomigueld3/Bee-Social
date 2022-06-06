@@ -1,0 +1,78 @@
+.mainContainer {
+  height: 100vh;
+}
+
+.main {
+  background-color: #fffef0;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 30% 30% 30%;
+  justify-content: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.reqError {
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  grid-column: 2;
+  text-align: center;
+}
+
+.reqError div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reqError img {
+  width: 300px;
+}
+
+.selectWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.selectTitle {
+  margin-right: 10px;
+  color: #27272a;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 150%;
+}
+
+.select {
+  width: 200px;
+  height: 30px;
+}
+
+@media (max-width: 1180px) {
+  .main {
+    grid-template-columns: 45% 45%;
+  }
+
+  .reqError {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 750px) {
+  .main {
+    grid-template-columns: 80%;
+  }
+
+  .selectTitle {
+    font-size: 20px;
+  }
+
+  .select {
+    width: 150px;
+    height: 30px;
+  }
+}
