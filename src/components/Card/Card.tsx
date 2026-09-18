@@ -1,43 +1,65 @@
 import './Card.css';
 import TagItem from './TagItem';
-
-interface AllInformation {
-  id: string;
-  name: string;
-  link: string;
-  street: string;
-  city: string;
-  state: string;
-  eventDate: string;
-  phone: string;
-  startTime: string;
-  eventPlace: string;
-}
+import { Event } from '../../types';
+import { useFavorites } from '../../context/FavoritesContext';
 
 interface CardProps {
-  allInformation: AllInformation;
+  event: Event;
+  index: number;
+  onClick: () => void;
 }
 
-export default function Card({ allInformation }: CardProps) {
+function getDateBadge(dateStr: string): { label: string; className: string } | null {
+  const parts = dateStr.trim().split('/').map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) return null;
+  const [day, month, year] = parts;
+  const eventDate = new Date(year, month - 1, day);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diff = Math.floor((eventDate.getTime() - today.getTime()) / 86_400_000);
+  if (diff === 0) return { label: 'Hoje', className: 'badgeToday' };
+  if (diff > 0 && diff <= 30) return { label: 'Em breve', className: 'badgeSoon' };
+  if (diff < 0) return { label: 'Passado', className: 'badgePast' };
+  return { label: 'Em breve', className: 'badgeSoon' };
+}
+
+export default function Card({ event, index, onClick }: CardProps) {
+  const { isFavorite, toggle } = useFavorites();
+  const favorite = isFavorite(event.id);
+  const badge = getDateBadge(event.eventDate);
+
   return (
-    <div className="cardItem">
-      <div>
-        <h3 className="cardTitle">{allInformation.name}</h3>
+    <div
+      className="cardItem"
+      style={{ animationDelay: `${index * 60}ms` }}
+    >
+      <div className="cardTopRow">
+        {badge && <span className={`badge ${badge.className}`}>{badge.label}</span>}
+        <button
+          className={`favoriteBtn ${favorite ? 'active' : ''}`}
+          onClick={e => { e.stopPropagation(); toggle(event.id); }}
+          aria-label={favorite ? 'Remover favorito' : 'Adicionar favorito'}
+          title={favorite ? 'Remover favorito' : 'Adicionar favorito'}
+        >
+          {favorite ? '♥' : '♡'}
+        </button>
+      </div>
+
+      <div className="cardClickable" onClick={onClick} role="button" tabIndex={0}
+        onKeyDown={e => e.key === 'Enter' && onClick()}>
+        <h3 className="cardTitle">{event.name}</h3>
         <p className="cardAddress">
-          {allInformation.street && (
-            <>
-              {allInformation.street} <br />
-            </>
-          )}
-          {allInformation.city}, {allInformation.state}
+          {event.street && <>{event.street}<br /></>}
+          {event.city}, {event.state}
         </p>
       </div>
+
       <TagItem
-        phone={allInformation.phone}
-        venue={allInformation.eventPlace}
-        type={allInformation.eventDate}
-        link={allInformation.link}
-        startTime={allInformation.startTime}
+        phone={event.phone}
+        venue={event.eventPlace}
+        type={event.eventDate}
+        link={event.link}
+        startTime={event.startTime}
       />
     </div>
   );

@@ -1,0 +1,15 @@
+.favoritesHeader {
+  padding: 24px 32px 0;
+}
+
+.favoritesTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.favoritesCount {
+  font-size: 14px;
+  color: var(--text-secondary);
+}

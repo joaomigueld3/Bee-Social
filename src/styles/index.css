@@ -1,14 +1,49 @@
-/* Font Import */
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700&display=swap');
+
+:root {
+  --color-primary: #f2ec54;
+
+  /* Light theme */
+  --bg-page: #fffef0;
+  --bg-card: #ffffff;
+  --header-bg: #f2ec54;
+  --text-primary: #27272a;
+  --text-secondary: #71717a;
+  --border-color: #e4e4e7;
+  --tag-bg: #f2ec54;
+  --tag-text: #27272a;
+  --badge-past-bg: #f4f4f5;
+  --badge-past-text: #71717a;
+  --skeleton-base: #e4e4e7;
+  --skeleton-highlight: #f4f4f5;
+}
+
+[data-theme='dark'] {
+  --bg-page: #18181b;
+  --bg-card: #27272a;
+  --header-bg: #1c1c20;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --border-color: #3f3f46;
+  --tag-bg: #3f3f46;
+  --tag-text: #f2ec54;
+  --badge-past-bg: #3f3f46;
+  --badge-past-text: #a1a1aa;
+  --skeleton-base: #3f3f46;
+  --skeleton-highlight: #52525b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
   font-family: 'Work Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
 }

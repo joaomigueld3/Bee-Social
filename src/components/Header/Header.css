@@ -1,56 +1,126 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 .header {
-  background-color: var(--color-primary);
-  height: 72px;
+  background-color: var(--header-bg);
+  height: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px 12px 15px;
+  padding: 0 24px 0 16px;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-.header p {
-  font-size: 30px;
-}
-
-.goBack {
+.headerLeft {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
 }
 
-.goBack button {
+.goBackBtn {
   cursor: pointer;
-  background-color: transparent;
+  background: transparent;
   border: none;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.goBackBtn:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.goBackBtn img {
+  width: 20px;
+  transition: transform 0.2s;
+}
+
+.goBackBtn:hover img {
+  transform: translateX(-3px);
+}
+
+.headerNav {
+  display: flex;
+  gap: 4px;
+}
+
+.navLink {
   text-decoration: none;
-  color: #000000;
-  transition: 0.5s;
-  font-size: 30px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.goBack button:hover {
-  color: rgb(85, 85, 85);
+.navLink:hover {
+  background: rgba(0, 0, 0, 0.08);
 }
 
-.goBack img {
-  transition: 0.5s;
-}
-.goBack img:hover {
-  transform: scale(1.1);
+.navLink.active {
+  background: rgba(0, 0, 0, 0.12);
 }
 
-@media (max-width: 750px) {
-  .header p {
-    font-size: 20px;
-    margin-left: 30px;
+.favCount {
+  background: #e11d48;
+  color: #fff;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 6px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+
+.themeToggle:hover {
+  transform: scale(1.15);
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 12px 0 10px;
   }
 
-  .goBack button {
-    font-size: 15px;
+  .goBackText {
+    display: none;
+  }
+
+  .username {
+    max-width: 80px;
+    font-size: 12px;
   }
 }

@@ -1,78 +1,99 @@
 .mainContainer {
-  height: 100vh;
+  min-height: 100vh;
+  background-color: var(--bg-page);
 }
 
-.main {
-  background-color: #fffef0;
-  display: grid;
-  gap: 30px;
-  grid-template-columns: 30% 30% 30%;
-  justify-content: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.reqError {
-  height: auto;
+.controlsRow {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 50px;
-  grid-column: 2;
-  text-align: center;
-}
-
-.reqError div {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.reqError img {
-  width: 300px;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 20px 24px;
 }
 
 .selectWrapper {
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  gap: 10px;
 }
 
 .selectTitle {
-  margin-right: 10px;
-  color: #27272a;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 150%;
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .select {
-  width: 200px;
-  height: 30px;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.select:focus {
+  border-color: #5d5fef;
+}
+
+.main {
+  background-color: var(--bg-page);
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 380px));
+  justify-content: center;
+  padding: 8px 24px 48px;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+.emptyState a {
+  color: #5d5fef;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.emptyState a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 1180px) {
   .main {
-    grid-template-columns: 45% 45%;
-  }
-
-  .reqError {
-    grid-column: auto;
+    grid-template-columns: repeat(2, minmax(0, 380px));
   }
 }
 
 @media (max-width: 750px) {
   .main {
-    grid-template-columns: 80%;
+    grid-template-columns: minmax(0, 480px);
+    padding: 8px 16px 48px;
   }
 
-  .selectTitle {
-    font-size: 20px;
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .selectWrapper {
+    justify-content: space-between;
   }
 
   .select {
-    width: 150px;
-    height: 30px;
+    flex: 1;
   }
 }

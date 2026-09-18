@@ -1,0 +1,50 @@
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeletonCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 12px 12px 16px 23px;
+}
+
+.skeletonTitle,
+.skeletonLine,
+.skeletonTag {
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 4px;
+}
+
+.skeletonTitle {
+  height: 22px;
+  width: 70%;
+  margin-bottom: 18px;
+}
+
+.skeletonLine {
+  height: 14px;
+  width: 85%;
+  margin-bottom: 10px;
+}
+
+.skeletonLineShort {
+  width: 55%;
+  margin-bottom: 22px;
+}
+
+.skeletonTags {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.skeletonTag {
+  height: 34px;
+  width: 120px;
+  border-radius: 99px;
+}

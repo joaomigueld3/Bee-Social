@@ -1,73 +1,132 @@
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .cardItem {
-  background-color: #ffffff;
-  border: 1px solid black;
-  border-radius: 4px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
   max-width: 400px;
-  padding: 12px 12px 7px 23px;
-  transition: 0.5s;
+  padding: 14px 14px 10px 20px;
+  transition: box-shadow 0.3s, transform 0.2s;
+  animation: fadeInUp 0.4s ease both;
 }
 
 .cardItem:hover {
-  box-shadow: 0 0 1em gold;
+  box-shadow: 0 4px 20px rgba(242, 236, 84, 0.4);
+  transform: translateY(-2px);
 }
 
-.cardItem button {
+.cardTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  min-height: 26px;
+}
+
+/* --- Badges --- */
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.badgeToday {
+  background: #f2ec54;
+  color: #1a1a1a;
+}
+
+.badgeSoon {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badgePast {
+  background: var(--badge-past-bg);
+  color: var(--badge-past-text);
+}
+
+/* --- Favorite button --- */
+.favoriteBtn {
+  background: none;
   border: none;
-  background-color: transparent;
-  position: relative;
-  left: 90%;
-  top: 20%;
-  padding-left: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 2px 4px;
+  line-height: 1;
+  transition: color 0.2s, transform 0.15s;
+  margin-left: auto;
 }
 
-.trashIcon {
-  width: 20px;
+.favoriteBtn.active {
+  color: #e11d48;
+}
+
+.favoriteBtn:hover {
+  color: #e11d48;
+  transform: scale(1.2);
+}
+
+/* --- Clickable area --- */
+.cardClickable {
   cursor: pointer;
 }
 
 .cardTitle {
-  color: #27272a;
-  font-size: 20px;
+  color: var(--text-primary);
+  font-size: 18px;
   font-weight: 700;
-  line-height: 150%;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.cardClickable:hover .cardTitle {
+  color: #5d5fef;
 }
 
 .cardAddress {
-  font-size: 16px;
-  color: #3f3f46;
-  margin-top: 22px;
-  margin-bottom: 26px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  line-height: 1.5;
 }
 
+/* --- Tags --- */
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .tagsItem {
-  background-color: #f2ec54;
+  background-color: var(--tag-bg);
   border-radius: 99px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 7px 10px;
-  font-size: 16px;
-  min-width: 130px;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--tag-text);
 }
 
 .tagsItem img {
-  width: 18px;
+  width: 16px;
 }
 
-.tagsItem input {
-  border: 1px solid #d4d4d8;
-  border-radius: 4px;
-  width: 85px;
-  padding: 1px 2px;
+.tagsItem a {
+  color: var(--tag-text);
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.feature {
-  cursor: pointer;
+.tagsItem a:hover {
+  text-decoration: underline;
 }

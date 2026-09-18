@@ -1,16 +1,16 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
-interface LoginProps {
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
-  username: string;
-}
+export default function Login() {
+  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
 
-export default function Login({ setIsLoggedIn, setUsername, username }: LoginProps) {
-  const login = (e: React.FormEvent<HTMLFormElement>) => {
+  function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setIsLoggedIn(true);
-  };
+    localStorage.setItem('username', username);
+    navigate('/events');
+  }
 
   return (
     <form className="form" onSubmit={login}>
@@ -32,9 +32,7 @@ export default function Login({ setIsLoggedIn, setUsername, username }: LoginPro
         </label>
       </div>
       <div className="buttonArea">
-        <button className="btnEnter" type="submit" title="Enter">
-          Enter
-        </button>
+        <button className="btnEnter" type="submit">Enter</button>
       </div>
     </form>
   );

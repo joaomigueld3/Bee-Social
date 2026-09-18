@@ -1,4 +1,3 @@
-import './Card.css';
 import statistcIcon from '../../assets/statistc.svg';
 import locationIcon from '../../assets/location.svg';
 import phoneIcon from '../../assets/phone.svg';
@@ -17,17 +16,15 @@ export default function TagItem({ type, venue, phone, link, startTime }: TagItem
     <div>
       <div className="tags">
         <div className="tagsItem">
-          <img src={statistcIcon} alt="Ícone" />
+          <img src={statistcIcon} alt="" />
           <p>{type}</p>
         </div>
-
         <div className="tagsItem">
-          <img src={statistcIcon} alt="Ícone" />
+          <img src={statistcIcon} alt="" />
           <p>{startTime}</p>
         </div>
-
         <div className="tagsItem">
-          <img src={locationIcon} alt="Ícone" />
+          <img src={locationIcon} alt="" />
           <p>{venue}</p>
         </div>
       </div>
@@ -35,16 +32,15 @@ export default function TagItem({ type, venue, phone, link, startTime }: TagItem
       <div className="tags">
         {phone && (
           <div className="tagsItem">
-            <img src={phoneIcon} alt="Ícone" />
+            <img src={phoneIcon} alt="" />
             <p>{phone}</p>
           </div>
         )}
-
         {link && (
           <div className="tagsItem">
-            <img src={CheckIcon} alt="Ícone" />
-            <a target="_blank" rel="noopener noreferrer" href={link}>
-              Visit the website!
+            <img src={CheckIcon} alt="" />
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              Ver ingresso ↗
             </a>
           </div>
         )}
