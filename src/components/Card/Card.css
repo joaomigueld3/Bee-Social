@@ -21,9 +21,17 @@
 .cardTopRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 10px;
   min-height: 26px;
+  gap: 6px;
+}
+
+.cardBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
 }
 
 /* --- Badges --- */
@@ -49,6 +57,26 @@
 .badgePast {
   background: var(--badge-past-bg);
   color: var(--badge-past-text);
+}
+
+.badgeCategory {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: transparent;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.badgePrice {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
 }
 
 /* --- Favorite button --- */

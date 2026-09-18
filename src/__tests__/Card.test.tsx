@@ -15,6 +15,8 @@ const mockEvent: Event = {
   phone: '(81) 99999-9999',
   startTime: '20:00',
   eventPlace: 'Teatro Teste',
+  category: 'Rock',
+  price: 'Até R$ 100',
 };
 
 function renderCard(onClick = vi.fn()) {

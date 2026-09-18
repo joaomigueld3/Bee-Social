@@ -3,45 +3,6 @@
   background-color: var(--bg-page);
 }
 
-.controlsRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 20px 24px;
-}
-
-.selectWrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.selectTitle {
-  color: var(--text-primary);
-  font-size: 15px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.select {
-  height: 40px;
-  padding: 0 10px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: var(--bg-card);
-  color: var(--text-primary);
-  font-size: 14px;
-  font-family: inherit;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.select:focus {
-  border-color: #5d5fef;
-}
 
 .main {
   background-color: var(--bg-page);
@@ -68,6 +29,24 @@
 
 .emptyState a:hover {
   text-decoration: underline;
+}
+
+.emptyStateReset {
+  margin-top: 14px;
+  background: none;
+  border: 1.5px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.emptyStateReset:hover {
+  border-color: #5d5fef;
+  color: #5d5fef;
 }
 
 @media (max-width: 1180px) {

@@ -1,22 +1,28 @@
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
 import '../styles/MainPage.css';
 import Header from '../components/Header/Header';
 import Card from '../components/Card/Card';
 import Skeleton from '../components/Card/Skeleton';
-import SearchBar from '../components/SearchBar/SearchBar';
 import EventDetail from '../components/EventDetail/EventDetail';
-import { allEventsByCity } from '../data/events';
+import Filters, { FilterState, INITIAL_FILTERS } from '../components/Filters/Filters';
+import { allEventsByCity, allEvents } from '../data/events';
 import { Event } from '../types';
 
-const CITIES = ['Recife', 'São Paulo', 'Rio de Janeiro'];
+function parseTime(timeStr: string): number {
+  const [h, m] = timeStr.split(':').map(Number);
+  return h * 60 + (m || 0);
+}
+
+function matchesPeriod(startTime: string, period: FilterState['period']): boolean {
+  if (period === 'Todos') return true;
+  const minutes = parseTime(startTime);
+  if (period === 'Tarde') return minutes < 18 * 60;
+  if (period === 'Noite') return minutes >= 18 * 60 && minutes < 22 * 60;
+  return minutes >= 22 * 60 || minutes < 6 * 60;
+}
 
 export default function MainPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const cityParam = searchParams.get('city') ?? 'Recife';
-  const city = CITIES.includes(cityParam) ? cityParam : 'Recife';
-
-  const [search, setSearch] = useState('');
+  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
@@ -24,40 +30,35 @@ export default function MainPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    setSearch('');
-    const t = setTimeout(() => setIsLoading(false), 600);
+    const t = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(t);
-  }, [city]);
+  }, [filters.city]);
 
-  function handleCityChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setSearchParams({ city: e.target.value });
-  }
+  const cityEvents = useMemo(
+    () => filters.city === 'Todas' ? allEvents : (allEventsByCity[filters.city] ?? []),
+    [filters.city]
+  );
 
-  const events = allEventsByCity[city] ?? [];
-  const filtered = search.trim()
-    ? events.filter(ev => ev.name.toLowerCase().includes(search.toLowerCase()))
-    : events;
+  const filtered = useMemo(() => {
+    return cityEvents.filter(ev => {
+      if (filters.search.trim() && !ev.name.toLowerCase().includes(filters.search.toLowerCase())) return false;
+      if (filters.category !== 'Todos' && ev.category !== filters.category) return false;
+      if (filters.price !== 'Todos' && ev.price !== filters.price) return false;
+      if (!matchesPeriod(ev.startTime, filters.period)) return false;
+      return true;
+    });
+  }, [cityEvents, filters.search, filters.category, filters.price, filters.period]);
 
   return (
     <div className="mainContainer">
       <Header username={username} />
 
-      <div className="controlsRow">
-        <div className="selectWrapper">
-          <label className="selectTitle" htmlFor="citySelect">Cidade:</label>
-          <select
-            id="citySelect"
-            className="select"
-            value={city}
-            onChange={handleCityChange}
-          >
-            {CITIES.map(c => (
-              <option key={c} value={c}>{c}</option>
-            ))}
-          </select>
-        </div>
-        <SearchBar value={search} onChange={setSearch} />
-      </div>
+      <Filters
+        filters={filters}
+        onChange={setFilters}
+        total={cityEvents.length}
+        filtered={filtered.length}
+      />
 
       <main className="main">
         {isLoading
@@ -68,7 +69,13 @@ export default function MainPage() {
               ))
             : (
               <div className="emptyState">
-                <p>Nenhum evento encontrado para "{search}".</p>
+                <p>Nenhum evento encontrado com os filtros aplicados.</p>
+                <button
+                  className="emptyStateReset"
+                  onClick={() => setFilters(INITIAL_FILTERS)}
+                >
+                  Limpar filtros
+                </button>
               </div>
             )
         }

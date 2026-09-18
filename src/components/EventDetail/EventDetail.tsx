@@ -55,6 +55,14 @@ export default function EventDetail({ event, onClose }: EventDetailProps) {
             <span className="detailLabel">🕐 Horário</span>
             <span className="detailValue">{event.startTime}</span>
           </div>
+          <div className="detailItem">
+            <span className="detailLabel">🎵 Categoria</span>
+            <span className="detailValue">{event.category}</span>
+          </div>
+          <div className="detailItem">
+            <span className="detailLabel">💰 Preço</span>
+            <span className="detailValue">{event.price}</span>
+          </div>
           {event.phone && (
             <div className="detailItem">
               <span className="detailLabel">📞 Telefone</span>

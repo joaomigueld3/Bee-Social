@@ -34,7 +34,11 @@ export default function Card({ event, index, onClick }: CardProps) {
       style={{ animationDelay: `${index * 60}ms` }}
     >
       <div className="cardTopRow">
-        {badge && <span className={`badge ${badge.className}`}>{badge.label}</span>}
+        <div className="cardBadges">
+          {badge && <span className={`badge ${badge.className}`}>{badge.label}</span>}
+          <span className="badgeCategory">{event.category}</span>
+          <span className="badgePrice">{event.price}</span>
+        </div>
         <button
           className={`favoriteBtn ${favorite ? 'active' : ''}`}
           onClick={e => { e.stopPropagation(); toggle(event.id); }}
