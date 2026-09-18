@@ -1,26 +1,22 @@
 import './Login.css';
 
 interface LoginProps {
-  setCondicional: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   username: string;
 }
 
-export default function Login({
-  setCondicional,
-  setUsername,
-  username
-}: LoginProps) {
-  const login = (e: any) => {
+export default function Login({ setIsLoggedIn, setUsername, username }: LoginProps) {
+  const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCondicional(true);
+    setIsLoggedIn(true);
   };
 
   return (
     <form className="form" onSubmit={login}>
       <p className="loginText">Please, enter your Email below</p>
       <input
-        type="text"
+        type="email"
         name="username"
         className="inputName"
         placeholder="Email"

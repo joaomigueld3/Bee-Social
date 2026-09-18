@@ -5,17 +5,15 @@ import bee from './assets/bee.svg';
 import { useState } from 'react';
 
 function App() {
-  const [condicional, setCondicional] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
 
-  if (!condicional) {
+  if (!isLoggedIn) {
     return (
       <div className="container">
-        <h1>
-          <a>Bee Social</a>
-        </h1>
+        <h1>Bee Social</h1>
         <Login
-          setCondicional={setCondicional}
+          setIsLoggedIn={setIsLoggedIn}
           setUsername={setUsername}
           username={username}
         />
@@ -23,7 +21,7 @@ function App() {
       </div>
     );
   }
-  return <MainPage setCondicional={setCondicional} username={username} />;
+  return <MainPage setIsLoggedIn={setIsLoggedIn} username={username} />;
 }
 
 export default App;

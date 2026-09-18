@@ -1,11 +1,5 @@
 import './Card.css';
-import trashIcon from '../../assets/trash.svg';
 import TagItem from './TagItem';
-
-interface CardProps {
-  allInformation: AllInformation;
-  handleDelete: (id: string) => void;
-}
 
 interface AllInformation {
   id: string;
@@ -17,21 +11,17 @@ interface AllInformation {
   eventDate: string;
   phone: string;
   startTime: string;
-  evetplace: string;
+  eventPlace: string;
 }
 
-export default function Card({ allInformation, handleDelete }: CardProps) {
+interface CardProps {
+  allInformation: AllInformation;
+}
+
+export default function Card({ allInformation }: CardProps) {
   return (
     <div className="cardItem">
       <div>
-        {/* <button onClick={() => handleDelete(allInformation.id)} title="Delete">
-          <img
-            src={trashIcon}
-            alt="Ícone de lixeira para excluir o card"
-            className="trashIcon"
-          />
-        </button> */}
-
         <h3 className="cardTitle">{allInformation.name}</h3>
         <p className="cardAddress">
           {allInformation.street && (
@@ -39,12 +29,12 @@ export default function Card({ allInformation, handleDelete }: CardProps) {
               {allInformation.street} <br />
             </>
           )}
-          {allInformation.city}, {allInformation.state} -{' '}
+          {allInformation.city}, {allInformation.state}
         </p>
       </div>
       <TagItem
         phone={allInformation.phone}
-        zip={allInformation.evetplace}
+        venue={allInformation.eventPlace}
         type={allInformation.eventDate}
         link={allInformation.link}
         startTime={allInformation.startTime}
