@@ -1,6 +1,6 @@
 # Bee Social 🐝
 
-Plataforma de descoberta de eventos musicais por cidade — projeto de portfólio construído com React, TypeScript e Vite.
+Plataforma de descoberta de eventos musicais por cidade — projeto construído com React, TypeScript e Vite.
 
 ## Screenshots 🖥️
 
@@ -30,7 +30,7 @@ Plataforma de descoberta de eventos musicais por cidade — projeto de portfóli
 - [Vite 5](https://vitejs.dev/) — build tool
 - [React Router v6](https://reactrouter.com/) — navegação client-side
 - [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) — testes unitários
-- CSS puro com variáveis de tema (sem UI library)
+- CSS puro com variáveis de tema
 
 ## Rodando localmente ⚙️
 
