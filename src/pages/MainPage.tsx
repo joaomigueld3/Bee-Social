@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import '../styles/MainPage.css';
 import Header from '../components/Header/Header';
 import Card from '../components/Card/Card';
@@ -22,7 +23,13 @@ function matchesPeriod(startTime: string, period: FilterState['period']): boolea
 }
 
 export default function MainPage() {
-  const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+  const [searchParams] = useSearchParams();
+  const [filters, setFilters] = useState<FilterState>(() => ({
+    ...INITIAL_FILTERS,
+    city: searchParams.get('city') || INITIAL_FILTERS.city,
+    search: searchParams.get('search') || INITIAL_FILTERS.search,
+    category: (searchParams.get('category') as FilterState['category']) || INITIAL_FILTERS.category,
+  }));
   const [isLoading, setIsLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
