@@ -31,4 +31,5 @@ export interface Event {
   eventPlace: string;
   category: EventCategory;
   price: EventPrice;
+  imageUrl?: string;
 }

@@ -33,6 +33,11 @@ export default function Card({ event, index, onClick }: CardProps) {
       className="cardItem"
       style={{ animationDelay: `${index * 60}ms` }}
     >
+      {event.imageUrl && (
+        <div className="cardBanner">
+          <img src={event.imageUrl} alt={`Banner de ${event.name}`} loading="lazy" />
+        </div>
+      )}
       <div className="cardTopRow">
         <div className="cardBadges">
           {badge && <span className={`badge ${badge.className}`}>{badge.label}</span>}

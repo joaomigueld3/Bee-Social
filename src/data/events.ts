@@ -14,6 +14,7 @@ export const recifeEvents: Event[] = [
     eventPlace: 'Armazém 14 Itaipava',
     category: 'Eletrônica',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://images.pexels.com/photos/7258865/pexels-photo-7258865.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '2',
@@ -28,6 +29,7 @@ export const recifeEvents: Event[] = [
     eventPlace: 'Ginásio de Esportes Geraldo Magalhães',
     category: 'Stand-up',
     price: 'Até R$ 100',
+    imageUrl: 'https://s2-g1.glbimg.com/Foyq4FzUdv4uVEVkTgC3tbgqvVw=/0x0:900x477/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/z/e/Ji5eNxS1iH3xfuuzhaig/whinderson.jpg',
   },
   {
     id: '3',
@@ -42,6 +44,7 @@ export const recifeEvents: Event[] = [
     eventPlace: 'Classic Hall',
     category: 'MPB',
     price: 'Até R$ 100',
+    imageUrl: 'https://www.gazetadigital.com.br/storage/webdisco/2019/11/25/1200x900/6bfbbd710ce892e8839aa57cb652cf17.jpg'
   },
   {
     id: '10',
@@ -56,6 +59,7 @@ export const recifeEvents: Event[] = [
     eventPlace: 'Classic Hall',
     category: 'Rock',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/dd/A-haVistalegre19.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original'
   },
   {
     id: '11',
@@ -70,6 +74,7 @@ export const recifeEvents: Event[] = [
     eventPlace: 'Teatro Guararapes',
     category: 'MPB',
     price: 'Até R$ 100',
+    imageUrl: 'https://img-prod.alvoradafm.com.br/notas-musicais/anavitoria_627579fa48b3e.JPG'
   },
   {
     id: '12',
@@ -84,6 +89,7 @@ export const recifeEvents: Event[] = [
     eventPlace: 'Clube Internacional do Recife',
     category: 'Rock',
     price: 'Até R$ 100',
+    imageUrl: 'https://i0.wp.com/www.madsound.com.br/wp-content/uploads/2022/03/Lucas-Silveira-da-Fresno-por-Camila-Cara.jpg?resize=1170%2C658&ssl=1'
   },
   {
     id: '19',
@@ -157,6 +163,7 @@ export const saoPauloEvents: Event[] = [
     eventPlace: 'Vibra São Paulo',
     category: 'MPB',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2kukp2iz2NZVc7bnIT8DcGeS9mKQhe_DhjrAHh7RT8Q&s=10'
   },
   {
     id: '5',
@@ -171,6 +178,7 @@ export const saoPauloEvents: Event[] = [
     eventPlace: 'Allianz Parque',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://images.pexels.com/photos/1416969/pexels-photo-1416969.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '6',
@@ -213,6 +221,7 @@ export const saoPauloEvents: Event[] = [
     eventPlace: 'Centro de Convenções - Anhembi',
     category: 'Pop',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://images.pexels.com/photos/4183059/pexels-photo-4183059.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '18',
@@ -269,6 +278,7 @@ export const saoPauloEvents: Event[] = [
     eventPlace: 'Autódromo de Interlagos',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://images.pexels.com/photos/8694375/pexels-photo-8694375.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '26',
@@ -300,6 +310,7 @@ export const rioEvents: Event[] = [
     eventPlace: 'Estádio Nilton Santos',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://images.pexels.com/photos/8694375/pexels-photo-8694375.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '8',
@@ -384,6 +395,7 @@ export const rioEvents: Event[] = [
     eventPlace: 'Cidade do Rock',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://images.pexels.com/photos/8694375/pexels-photo-8694375.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '28',
@@ -600,6 +612,7 @@ export const beloHorizonteEvents: Event[] = [
     eventPlace: 'Parque Municipal',
     category: 'Jazz',
     price: 'Gratuito',
+    imageUrl: 'https://images.pexels.com/photos/359995/pexels-photo-359995.jpeg?auto=compress&cs=tinysrgb&w=600',
   },
   {
     id: '43',
@@ -746,6 +759,7 @@ export const standUpEvents: Event[] = [
     eventPlace: 'Teatro Opus',
     category: 'Stand-up',
     price: 'Até R$ 100',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIH3T3F7vn-GA15HEQ9_efQ6eAbsYZnEjZLGVq7RlExaIf46F6HMT3OZq&s=10',
   },
   {
     id: '53',
@@ -760,6 +774,7 @@ export const standUpEvents: Event[] = [
     eventPlace: 'Teatro Rival',
     category: 'Stand-up',
     price: 'Até R$ 100',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFIH3T3F7vn-GA15HEQ9_efQ6eAbsYZnEjZLGVq7RlExaIf46F6HMT3OZq&s=10'
   },
   {
     id: '54',
@@ -822,7 +837,7 @@ export const standUpEvents: Event[] = [
 export const metalRockEvents: Event[] = [
   {
     id: '58',
-    name: 'Angra — Gods of War Tour',
+    name: 'Angra — Holy Land 30th anniversary tour',
     link: 'https://www.eventim.com.br',
     street: 'Av. Francisco Matarazzo, 1705',
     city: 'São Paulo',
@@ -833,10 +848,11 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Vibra São Paulo',
     category: 'Rock',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://www.bandab.com.br/wp-content/uploads/2026/06/angra-show-curitiba-30-anos-disco-holy-land-1-960x592.jpg'
   },
   {
     id: '59',
-    name: 'Angra — Gods of War Tour',
+    name: 'Angra — Holy Land 30th anniversary tour',
     link: 'https://www.sympla.com.br',
     street: 'Av. Cristóvão Colombo, 859',
     city: 'Belo Horizonte',
@@ -847,6 +863,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Chevrolet Hall',
     category: 'Rock',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://www.bandab.com.br/wp-content/uploads/2026/06/angra-show-curitiba-30-anos-disco-holy-land-1-960x592.jpg'
   },
   {
     id: '60',
@@ -861,6 +878,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Allianz Parque',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://rockcellarmagazine.com/wp-content/uploads/2023/06/queens-of-the-stone-age-tour-2023.jpg'
   },
   {
     id: '61',
@@ -889,6 +907,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Allianz Parque',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWiU_y_UtJg-9VYv_K0N9JD45ChEm6Z7Q2NP7kZyO9zw&s=10',
   },
   {
     id: '63',
@@ -903,6 +922,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Jeunesse Arena',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWiU_y_UtJg-9VYv_K0N9JD45ChEm6Z7Q2NP7kZyO9zw&s=10'
   },
   {
     id: '64',
@@ -917,6 +937,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Allianz Parque',
     category: 'Rock',
     price: 'Acima de R$ 200',
+    imageUrl: 'https://cdn.media.amplience.net/i/metallica/Live-Met_Home-Card_1x1?fmt=auto&w=580',
   },
   {
     id: '65',
@@ -945,6 +966,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Vibra São Paulo',
     category: 'Rock',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzr8MZ_3K_UpOhZDepNS59UHBNOdWS0nu9S7godrUlGw&s=10'
   },
   {
     id: '67',
@@ -959,6 +981,7 @@ export const metalRockEvents: Event[] = [
     eventPlace: 'Pepsi On Stage',
     category: 'Rock',
     price: 'R$ 100 a 200',
+    imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzr8MZ_3K_UpOhZDepNS59UHBNOdWS0nu9S7godrUlGw&s=10'
   },
   {
     id: '68',

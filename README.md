@@ -9,15 +9,20 @@ Plataforma de descoberta de eventos musicais por cidade — projeto de portfóli
 
 ## Funcionalidades ✨
 
-- **Listagem por cidade** — Recife, São Paulo e Rio de Janeiro
-- **Busca em tempo real** — filtro por nome do evento
+- **Listagem de eventos** — 70+ eventos em 6 cidades (Recife, São Paulo, Rio de Janeiro, Fortaleza, Belo Horizonte e Porto Alegre)
+- **Filtros combinados** — categoria (pills), cidade, preço, período do dia e busca por nome, tudo em uma barra unificada
+- **Banner de imagem** — eventos com imagem exibem banner no card e no modal
+- **Modal de detalhes** — informações completas, fechar com `Esc` ou clique fora
+- **Google Maps** — endereço clicável e botão "Ver no Maps" no modal
+- **Google Agenda** — botão "Salvar na Agenda" pré-preenche nome, data, horário e local
 - **Dark mode** — detecta preferência do sistema, persistido no localStorage
-- **Favoritar eventos** — salvo entre sessões via localStorage
-- **Página de favoritos** — `/favorites` com todos os eventos salvos
-- **Modal de detalhes** — clique no card para ver todas as informações; fechar com `Esc` ou clique fora
+- **Favoritar eventos** — salvo entre sessões via localStorage; página `/favorites` dedicada
 - **Badge de data** — indica `Hoje`, `Em breve` ou `Passado` em cada card
-- **Skeleton loading** — animação de carregamento ao trocar de cidade
-- **Roteamento** — URLs amigáveis com React Router (`/events?city=...`, `/favorites`)
+- **Badges de categoria e preço** — exibidos diretamente no card
+- **Skeleton loading** — animação ao trocar de cidade
+- **Animações escalonadas** — cards entram com `fadeInUp` em cascata
+- **Roteamento** — React Router com rotas protegidas (`/events`, `/favorites`)
+- **Testes unitários** — 11 testes cobrindo Card, SearchBar e FavoritesContext
 
 ## Tecnologias 🛠️
 
@@ -53,23 +58,23 @@ O projeto inclui `vercel.json` com rewrites configurados para o React Router fun
 
 ```
 src/
-├── __tests__/          # testes unitários
-├── assets/             # ícones e imagens
+├── __tests__/          # testes unitários (Card, SearchBar, FavoritesContext)
+├── assets/             # ícones e imagens estáticas
 ├── components/
 │   ├── Card/           # card de evento, skeleton, tags
-│   ├── EventDetail/    # modal de detalhes
-│   ├── Header/         # navegação e controles globais
-│   ├── Login/          # formulário de login
-│   └── SearchBar/      # busca por nome
+│   ├── EventDetail/    # modal de detalhes (Maps, Agenda, ingresso)
+│   ├── Filters/        # barra de filtros unificada
+│   ├── Header/         # navegação, dark mode e logout
+│   └── Login/          # formulário de login
 ├── context/
 │   ├── FavoritesContext.tsx
 │   └── ThemeContext.tsx
 ├── data/
-│   └── events.ts       # dados dos eventos
+│   └── events.ts       # 70+ eventos com categoria, preço e imagem
 ├── pages/
 │   ├── MainPage.tsx
 │   └── FavoritesPage.tsx
-├── styles/             # CSS global e variáveis de tema
+├── styles/             # CSS global e variáveis de tema (light/dark)
 └── types/
-    └── index.ts        # tipos compartilhados
+    └── index.ts        # tipos compartilhados (Event, EventCategory, EventPrice)
 ```
