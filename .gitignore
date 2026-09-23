@@ -34,3 +34,4 @@ coverage/
 # Ignora apenas dados locais e sessões do Claude, mantendo as skills/configs do projeto
 .claude/settings.local.json
 .claude/SESSION.md
+.vercel
