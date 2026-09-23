@@ -22,7 +22,7 @@ Plataforma de descoberta de eventos musicais por cidade — projeto construído 
 - **Skeleton loading** — animação ao trocar de cidade
 - **Animações escalonadas** — cards entram com `fadeInUp` em cascata
 - **Roteamento** — React Router com rotas protegidas (`/events`, `/favorites`)
-- **Testes unitários** — 11 testes cobrindo Card, SearchBar e FavoritesContext
+- **Testes unitários** — 26 testes cobrindo Card, Filters, EventDetail e FavoritesContext
 
 ## Tecnologias 🛠️
 
