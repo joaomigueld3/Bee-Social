@@ -1,64 +1,33 @@
 ---
 name: dev-check
-description: Verifica vulnerabilidades de dependências e do código, testa o .gitignore e atualiza os testes
-model: claude-sonnet-4-6
+description: Verificação completa do projeto (tipos, testes, vulnerabilidades, código, .gitignore) e sincronização do CLAUDE.md
 ---
 
-## 1. Vulnerabilidades de dependências
+## 1. Checagem automática
 
-Rode `npm audit --json` e liste vulnerabilidades com severity `critical` ou `high`.  
-Se houver, sugira `npm audit fix` (ou `npm audit fix --force` para breaking changes, com aviso).
+Rode `npm run check` (chama `scripts/project-check.mjs --full`). Ele executa:
+`tsc`, `vitest`, `npm audit`, checagem do `.gitignore`, arquivos sensíveis versionados,
+varredura de padrões XSS/injeção em `src/` e detecção de arquivos não usados, e regenera o bloco AUTO do `CLAUDE.md`.
 
-## 2. Vulnerabilidades no código (OWASP Top 10)
+## 2. Análise que o script não faz (leia o código)
 
-Analise os arquivos em `src/` buscando os seguintes padrões — confirme se são reais antes de reportar:
+- `target="_blank"` sem `rel="noopener noreferrer"`
+- `localStorage` guardando algo além de `username`, `theme`, `favorites`
+- Interpolação de input do usuário em URLs/HTML; links externos vindos de dados sem validação
+- Dependências desnecessárias ou imports mortos
+- Componentes/funções novos sem teste correspondente em `src/__tests__/`
 
-- **XSS**: uso de `dangerouslySetInnerHTML`, `innerHTML`, `document.write`, `eval()`, interpolação de input do usuário em HTML
-- **Injeção**: template literals com dados externos enviados para `fetch`, `eval`, `new Function()`
-- **Exposição de dados sensíveis**: `console.log` com tokens, senhas, dados pessoais; `localStorage` guardando mais do que o necessário (ex: tokens de sessão reais)
-- **Autenticação fraca**: verificações de auth apenas no frontend sem validação real (anote mas não considere crítico para app de portfolio)
-- **Dependências desnecessariamente permissivas**: imports de `*` ou `require()` dinâmico com variável externa
-- **URLs hardcoded** com credenciais ou endpoints privados
+## 3. Testes
 
-Para cada problema encontrado, indique: arquivo, linha, severidade (alta/média/baixa) e sugestão de correção.
+Para cada teste falhando: leia teste e código, decida se o erro é do teste (mock/asserção desatualizados) ou do código, e corrija o lado certo.
+Para código novo sem cobertura, escreva os testes seguindo o padrão dos existentes (Testing Library, `FavoritesProvider` quando necessário).
 
-## 3. Verificação do .gitignore
+## 4. CLAUDE.md
 
-Leia o arquivo `.gitignore` do projeto e verifique se estão incluídas as seguintes entradas essenciais:
+Compare as seções narrativas (Arquitetura, Componentes, Testes, Dívidas conhecidas) com o código atual e corrija o que divergiu.
+Remova dívidas resolvidas; adicione as novas. Não edite o bloco AUTO.
 
-```
-node_modules/
-dist/
-.env
-.env.local
-.env.*.local
-*.local
-.DS_Store
-Thumbs.db
-coverage/
-*.log
-```
+## 5. Relatório
 
-Verifique também se há arquivos sensíveis já rastreados pelo git que deveriam estar no `.gitignore`:
-
-```bash
-git ls-files | grep -E '\.(env|key|pem|secret|token)' 
-git ls-files | grep -E '^\.env'
-```
-
-Se encontrar lacunas, sugira as linhas a adicionar.
-
-## 4. Testes
-
-Rode `npm test -- --run` e capture a saída.  
-Para cada teste falhando:
-1. Leia o arquivo de teste correspondente em `src/__tests__/`
-2. Leia o componente ou contexto testado
-3. Identifique se a falha é no teste (mock desatualizado, asserção errada) ou no código
-4. Aplique a correção no arquivo correto
-
-## 5. Resumo final
-
-Apresente um relatório com:
-- ✅ / ⚠️ / ❌ para cada seção (dependências, código, .gitignore, testes)
-- Lista priorizada de ações (crítico → médio → baixo)
+Mostre ✅/⚠️/❌ por seção (dependências, código, .gitignore, testes, CLAUDE.md), com ações priorizadas.
+Não faça commit: sugira apenas o nome do commit (Conventional Commits, inglês).

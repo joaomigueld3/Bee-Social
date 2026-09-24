@@ -7,7 +7,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "docs:sync": "node scripts/project-check.mjs --sync",
+    "check": "node scripts/project-check.mjs --full"
   },
   "dependencies": {
     "react": "^18.0.0",
