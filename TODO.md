@@ -2,32 +2,31 @@
 
 Legenda: `[ ]` a fazer · `[x]` feito · prioridade **P1** (fazer já) / **P2** (próxima) / **P3** (algum dia).
 Cada item = **uma branch** saindo de `develop` (git flow: `feature/…`, `bugfix/…`; urgência em produção: `hotfix/…` saindo de `main`).
+Feature nova passa pelo onp-spec (spec → scaffold → implementação → `verify` + `spec:audit`); a spec é commitada na própria branch da feature.
 Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o merge em `develop`.
 
 ## Em andamento
-- [ ] (nada em andamento)
+- [ ] **P1** `feature/onp-spec-ci` — onp-spec configurado para Vitest, constituição (P-002/P-003), CI + CodeQL + Dependabot, limpeza das referências ao `project-check`
 
 ## Próximos (ordenados)
 
-### Setup
-- [ ] **P1** Commitar a automação (`CLAUDE.md`, `TODO.md`, `scripts/`, `.githooks/`, `.claude/`, `package.json`) em `main`, criar `develop` a partir dela e ativar o pre-commit (`git config core.hooksPath .githooks`)
-
 ### Manutenção
-- [ ] **P1** `feature/audit-fix` — rodar `npm audit fix` (2 critical + 1 high, só dev) e conferir testes/build
-- [ ] **P1** `feature/remove-dead-code` — apagar `src/components/Login/` e `src/styles/App.css` (não usados)
+- [ ] **P1** `feature/audit-fix` — `npm audit fix` (2 critical + 1 high, só dev). **Pré-requisito para o CI ficar verde.**
 - [ ] **P2** `feature/refresh-screenshots` — screenshots do README estão antigas (landing, filtros, modal, dark mode)
 
-### Qualidade
-- [ ] **P2** `feature/landing-mainpage-tests` — testes de `LandingPage` (`goToEvents`, redirect se logado) e `MainPage` (`matchesPeriod`, filtros via URL)
-- [ ] **P3** `feature/theme-header-tests` — testes de `ThemeContext` e `Header`
-- [ ] **P2** `bugfix/event-images` — trocar as 7 miniaturas do Google (`encrypted-tbn0…`) por imagens de resolução real (não sobrescrever as do usuário sem pedir)
-
-### Funcionalidades (ideias)
+### Funcionalidades
+- [ ] **P1** `feature/rsvp` — "Eu Vou" (RSVP). Spec pronta em `.spec/features/eu-vou/` (US-001…005, AC-001…010, T-001…007; fonte: `SPECS-RSVP.md`). Antes de implementar, responder Q-001 (filtro na URL?), Q-002 (página `/presencas`?), Q-003 (indicador do Header é link?) e confirmar ASM-001…003. O T-001 já inclui a remoção do código morto (`Login/`, `App.css`).
 - [ ] **P3** `feature/event-sorting` — ordenação (data, preço) e "ocultar eventos passados"
 - [ ] **P3** `feature/url-filters-sync` — sincronizar filtros com a URL depois da montagem (hoje só lê na montagem)
 - [ ] **P3** `feature/artist-page` — página de artista (hoje o carrossel só filtra por `?search=`)
 - [ ] **P3** `feature/share-ics` — compartilhar evento (Web Share API) e baixar `.ics`
 - [ ] **P3** `feature/seo-meta` — meta tags/Open Graph, favicon, domínio próprio
+
+### Qualidade
+- [ ] **P2** `feature/landing-mainpage-tests` — testes de `LandingPage` (`goToEvents`, redirect se logado) e `MainPage` (`matchesPeriod`, filtros via URL)
+- [ ] **P3** `feature/theme-header-tests` — testes de `ThemeContext` e `Header` (o do Header pode vir junto do RSVP, T-003)
+- [ ] **P2** `bugfix/event-images` — trocar as 7 miniaturas do Google (`encrypted-tbn0…`) por imagens de resolução real (não sobrescrever as do usuário sem pedir)
+- [ ] **P3** Trazer o código legado para o onp-spec aos poucos (hoje listado em `ignoreGlobs` do `onpspec.config.json`)
 
 ## Feito
 - [x] Roteamento, dark mode, favoritos, busca, skeleton, modal, animações
@@ -35,4 +34,4 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 - [x] Banner de imagem, Google Maps, Google Agenda
 - [x] Landing page (animações, carrossel clicável, botões de categoria/cidade)
 - [x] Testes: Card, Filters, EventDetail, FavoritesContext (26)
-- [x] Automação: `project-check`, hook Stop, pre-commit, `CLAUDE.md`
+- [x] `CLAUDE.md` e git flow; `develop` criada
