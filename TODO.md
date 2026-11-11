@@ -6,7 +6,7 @@ Feature nova passa pelo onp-spec (spec → scaffold → implementação → `ver
 Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o merge em `develop`.
 
 ## Em andamento
-- [ ] **P1** `feature/rsvp` — implementar T-001…T-007 de `.spec/features/eu-vou/` (spec completa, perguntas e suposições respondidas). Próximo: T-001.
+- [ ] **P1** `feature/rsvp` — implementar T-001…T-007 de `.spec/features/eu-vou/` (spec completa, perguntas e suposições respondidas). T-001 feita; próximo: T-002.
 
 ## Próximos (ordenados)
 

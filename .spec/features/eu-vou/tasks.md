@@ -2,7 +2,7 @@
 
 > feature: eu-vou
 
-## T-001 — Base de testes e limpeza de código morto [pendente]
+## T-001 — Base de testes e limpeza de código morto [concluida]
 
 - Refs: US-001
 - Arquivos: src/setupTests.ts, src/components/Login/Login.tsx, src/components/Login/Login.css, src/styles/App.css
