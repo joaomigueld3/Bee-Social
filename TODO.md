@@ -6,7 +6,7 @@ Feature nova passa pelo onp-spec (spec → scaffold → implementação → `ver
 Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o merge em `develop`.
 
 ## Em andamento
-- [ ] **P1** `feature/rsvp` — T-001…T-007 de `.spec/features/eu-vou/` implementadas; falta `verify` + `spec:audit`, confirmar com o usuário e merge em `develop`.
+- Nenhuma tarefa em andamento.
 
 ## Próximos (ordenados)
 
@@ -36,3 +36,4 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 - [x] `CLAUDE.md` e git flow; `develop` criada
 - [x] onp-spec + Vitest, constituição (P-002/P-003), CI, CodeQL e Dependabot (`feature/onp-spec-ci`)
 - [x] Spec do RSVP (`.spec/features/eu-vou/`)
+- [x] Eu vou / RSVP: presença por card e detalhe, total no Header, filtro "Só confirmados"; 45 testes, 10/10 ACs provados (`feature/rsvp`)
