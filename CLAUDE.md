@@ -50,7 +50,7 @@ Decisões de produto em aberto (Q-xxx) são perguntadas ao usuário, nunca inven
 
 ```
 main.tsx
-└─ App.tsx  ── ThemeProvider > FavoritesProvider > BrowserRouter > Routes
+└─ App.tsx  ── ThemeProvider > FavoritesProvider > RSVPProvider > BrowserRouter > Routes
      ├─ /            LandingPage      (pública; se já "logado", redireciona p/ /events)
      ├─ /events      PrivateRoute > MainPage
      ├─ /favorites   PrivateRoute > FavoritesPage
@@ -68,6 +68,7 @@ Não existe login real. `localStorage['username']` é apenas uma flag: a `Landin
 
 - `ThemeContext` — `theme: 'light' | 'dark'`. Inicia por `localStorage['theme']`, senão `prefers-color-scheme`. Aplica `data-theme` em `document.documentElement` e persiste. Hook: `useTheme()`.
 - `FavoritesContext` — `Set<string>` de ids de evento, persistido em `localStorage['favorites']` (JSON array). API: `favorites`, `toggle(id)`, `isFavorite(id)`. Hook: `useFavorites()`.
+- `RSVPContext` — "Eu vou": `Set<string>` de ids de eventos com presença confirmada, persistido em `localStorage['bee_social_rsvp']` (JSON array; ignora dado inválido). Independente dos favoritos. API: `confirmedEventIds`, `confirmedCount`, `isAttending(id)`, `toggleAttendance(id)`. Hook: `useRSVP()`. Sem provider, o hook devolve no-ops (os testes antigos de Card/EventDetail seguem sem envolver em `RSVPProvider`).
 
 ### Tema (light/dark)
 
@@ -84,16 +85,16 @@ Variáveis CSS em `src/styles/index.css`: `:root` (light) e `[data-theme='dark']
 
 ### Filtros (fonte única de verdade)
 
-`FilterState { city, search, category, price, period }` + `INITIAL_FILTERS` em `Filters.tsx`. `MainPage` guarda o estado, escolhe `allEvents` (city `'Todas'`) ou `allEventsByCity[city]` e filtra em `useMemo` (busca por substring case-insensitive no nome, categoria, preço, período via `matchesPeriod`: Tarde < 18h, Noite 18–22h, Madrugada ≥ 22h ou < 6h). Skeleton de 500 ms ao trocar de cidade.
+`FilterState { city, search, category, price, period, onlyConfirmed }` + `INITIAL_FILTERS` em `Filters.tsx`. `MainPage` guarda o estado, escolhe `allEvents` (city `'Todas'`) ou `allEventsByCity[city]` e filtra em `useMemo` (busca por substring case-insensitive no nome, categoria, preço, período via `matchesPeriod`: Tarde < 18h, Noite 18–22h, Madrugada ≥ 22h ou < 6h; `onlyConfirmed` mantém só ids de `useRSVP().confirmedEventIds`). `onlyConfirmed` conta em `countActiveFilters`, é zerado por "Limpar" e **não vai para a URL**. Skeleton de 500 ms ao trocar de cidade.
 
 **Filtros iniciais vêm da URL:** `MainPage` lê `?city=`, `?search=`, `?category=` via `useSearchParams` **apenas na montagem** (initializer do `useState`). A landing usa isso: botões de categoria/cidade e cards do carrossel navegam para `/events?...`. Mudar a URL depois da montagem não atualiza os filtros.
 
 ### Componentes principais
 
-- `Card` — card do evento: banner opcional (`imageUrl`), badges (data: Hoje/Em breve/Passado; categoria; preço), botão de favorito (`stopPropagation`), animação `fadeInUp` escalonada via `animationDelay: index * 60ms`. Clique abre o modal.
-- `EventDetail` — modal (overlay + painel). Fecha com Esc, clique no overlay ou botão; trava scroll do body. Gera links: Google Maps (`buildMapsUrl`, sem API key) e Google Agenda (`buildGCalUrl`, evento de 2h a partir de `startTime`, formato `YYYYMMDDTHHmmss`). Todo `target="_blank"` usa `rel="noopener noreferrer"`.
-- `Filters` — barra unificada: pills de categoria + busca + selects de cidade/preço/período + contador + "Limpar".
-- `Header` — Sair, nav (Eventos / Favoritos com contador), toggle de tema, username.
+- `Card` — card do evento: banner opcional (`imageUrl`), badges (data: Hoje/Em breve/Passado; categoria; preço; selo verde "Eu vou" se confirmado), botão de presença `+`/`✓` e botão de favorito (ambos com `stopPropagation`), animação `fadeInUp` escalonada via `animationDelay: index * 60ms`. Clique abre o modal.
+- `EventDetail` — modal (overlay + painel). Fecha com Esc, clique no overlay ou botão; trava scroll do body. Botão "Confirmar Presença" / "✓ Presença Confirmada (Cancelar)" ao lado de "Salvar na Agenda". Gera links: Google Maps (`buildMapsUrl`, sem API key) e Google Agenda (`buildGCalUrl`, evento de 2h a partir de `startTime`, formato `YYYYMMDDTHHmmss`). Todo `target="_blank"` usa `rel="noopener noreferrer"`.
+- `Filters` — barra unificada: pills de categoria + busca + selects de cidade/preço/período + botão "✓ Só confirmados" (`aria-pressed`) + contador + "Limpar".
+- `Header` — Sair, nav (Eventos / Favoritos com contador / "✓ Presenças" com total, só informativo, `role="status"`), toggle de tema, username.
 - `LandingPage` — hero com animações de entrada, toggle de tema, CTA, botões de categoria e cidade, carrossel (marquee CSS infinito) alimentado por `allEvents.filter(e => e.imageUrl)`; o nome do "artista" é `event.name.split(' — ')[0]`. Clicar num card navega para `/events?search=<artista>` (não existe página de artista). Respeita `prefers-reduced-motion`.
 
 ## Convenções
@@ -105,20 +106,19 @@ Variáveis CSS em `src/styles/index.css`: `:root` (light) e `[data-theme='dark']
 - **Segurança:** sem `dangerouslySetInnerHTML`/`eval`/`innerHTML`; `rel="noopener noreferrer"` em links externos; nada sensível em `localStorage`.
 - **Acessibilidade:** botões reais (`<button>`), `aria-label` em ícones, `role="group"` em grupos de botões.
 
-## Testes (`src/__tests__`, 26 testes)
+## Testes (`src/__tests__`, 45 testes)
 
-`Card`, `Filters`, `EventDetail`, `FavoritesContext`. Setup em `src/setupTests.ts` (`jest-dom`). Padrão: envolver em `FavoritesProvider` quando o componente usa `useFavorites`; `mockEvent` tipado como `Event`.
-**Sem cobertura ainda:** `LandingPage` (`goToEvents` grava flag + querystring; redirect se logado), `MainPage` (`matchesPeriod`/`parseTime`, leitura da URL), `ThemeContext`, `Header`. Ao mudar comportamento, atualize/adicione testes junto.
+`Card`, `Filters`, `EventDetail`, `Header`, `MainPage` (só o filtro "Só confirmados"), `FavoritesContext`, `RSVPContext`. Setup em `src/setupTests.ts`: `jest-dom`, stub de `window.matchMedia`, `localStorage.clear()` antes de cada teste e `Storage` em memória quando o Node (22+) expõe um `localStorage` global sem métodos que sombreia o do jsdom. Padrão: envolver em `FavoritesProvider`/`RSVPProvider` quando o componente usa os hooks; `mockEvent` tipado como `Event`. As provas dos ACs do onp-spec ficam aqui, com `@spec:AC-xxx` no título.
+**Sem cobertura ainda:** `LandingPage` (`goToEvents` grava flag + querystring; redirect se logado), `MainPage` (`matchesPeriod`/`parseTime`, leitura da URL), `ThemeContext`. Ao mudar comportamento, atualize/adicione testes junto.
 
 Antes de dar algo por concluído: `npx tsc --noEmit` e `npm test -- --run` devem passar.
 
 ## Dívidas conhecidas / pendências
 
-1. **Código morto:** `src/components/Login/` (Login.tsx/css) e `src/styles/App.css` não são mais importados por nada — podem ser removidos.
-2. **Dependências:** `npm audit` reporta 7 vulns (3 critical/high em `vite`, `vitest`, `form-data`), todas só de dev/build — não afetam o bundle de produção. `npm audit fix` resolve sem breaking changes.
-3. **Imagens:** `imageUrl` vem de fontes mistas. Algumas URLs (`encrypted-tbn0.gstatic.com`, Khalid/Rafinha Bastos/Arctic Monkeys) são miniaturas do Google de baixa resolução e ficam borradas no banner; o usuário adiciona URLs manualmente e **quer preservá-las** — não sobrescreva `imageUrl` existentes sem pedir. Alguns hosts podem bloquear hotlink. Unsplash sem autenticação retorna 404; Pexels CDN funciona.
-4. **README:** screenshots (`src/assets/print-screen*.png`) são antigas.
-5. `Filters.tsx` exporta a constante `CITIES` e o componente; a landing importa dele (acoplamento aceitável, mas poderia ir para `src/data`).
+1. **Dependências:** `npm audit` reporta 7 vulns (3 critical/high em `vite`, `vitest`, `form-data`), todas só de dev/build — não afetam o bundle de produção. `npm audit fix` resolve sem breaking changes.
+2. **Imagens:** `imageUrl` vem de fontes mistas. Algumas URLs (`encrypted-tbn0.gstatic.com`, Khalid/Rafinha Bastos/Arctic Monkeys) são miniaturas do Google de baixa resolução e ficam borradas no banner; o usuário adiciona URLs manualmente e **quer preservá-las** — não sobrescreva `imageUrl` existentes sem pedir. Alguns hosts podem bloquear hotlink. Unsplash sem autenticação retorna 404; Pexels CDN funciona.
+3. **README:** screenshots (`src/assets/print-screen*.png`) são antigas.
+4. `Filters.tsx` exporta a constante `CITIES` e o componente; a landing importa dele (acoplamento aceitável, mas poderia ir para `src/data`).
 
 ## Fluxo de trabalho com o usuário
 

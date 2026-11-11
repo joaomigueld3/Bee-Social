@@ -6,7 +6,7 @@ Feature nova passa pelo onp-spec (spec → scaffold → implementação → `ver
 Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o merge em `develop`.
 
 ## Em andamento
-- [ ] **P1** `feature/rsvp` — implementar T-001…T-007 de `.spec/features/eu-vou/` (spec completa, perguntas e suposições respondidas). T-001 feita; próximo: T-002.
+- [ ] **P1** `feature/rsvp` — T-001…T-007 de `.spec/features/eu-vou/` implementadas; falta `verify` + `spec:audit`, confirmar com o usuário e merge em `develop`.
 
 ## Próximos (ordenados)
 
@@ -23,7 +23,7 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 
 ### Qualidade
 - [ ] **P2** `feature/landing-mainpage-tests` — testes de `LandingPage` (`goToEvents`, redirect se logado) e `MainPage` (`matchesPeriod`, filtros via URL)
-- [ ] **P3** `feature/theme-header-tests` — testes de `ThemeContext` e `Header` (o do Header pode vir junto do RSVP, T-003)
+- [ ] **P3** `feature/theme-header-tests` — testes de `ThemeContext` e `Header` (o do Header já veio com o RSVP)
 - [ ] **P2** `bugfix/event-images` — trocar as 7 miniaturas do Google (`encrypted-tbn0…`) por imagens de resolução real (não sobrescrever as do usuário sem pedir)
 - [ ] **P3** Trazer o código legado para o onp-spec aos poucos (hoje listado em `ignoreGlobs` do `onpspec.config.json`)
 

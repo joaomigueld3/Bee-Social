@@ -17,12 +17,13 @@ Plataforma de descoberta de eventos musicais por cidade — projeto construído 
 - **Google Agenda** — botão "Salvar na Agenda" pré-preenche nome, data, horário e local
 - **Dark mode** — detecta preferência do sistema, persistido no localStorage
 - **Favoritar eventos** — salvo entre sessões via localStorage; página `/favorites` dedicada
+- **Eu vou (RSVP)** — confirme presença pelo card ou pelo detalhe, veja o total no topo e filtre por "Só confirmados"; salvo em localStorage
 - **Badge de data** — indica `Hoje`, `Em breve` ou `Passado` em cada card
 - **Badges de categoria e preço** — exibidos diretamente no card
 - **Skeleton loading** — animação ao trocar de cidade
 - **Animações escalonadas** — cards entram com `fadeInUp` em cascata
 - **Roteamento** — React Router com rotas protegidas (`/events`, `/favorites`)
-- **Testes unitários** — 26 testes cobrindo Card, Filters, EventDetail e FavoritesContext
+- **Testes unitários** — 45 testes cobrindo Card, Filters, EventDetail, Header, MainPage e os contextos de favoritos e presenças
 
 ## Tecnologias 🛠️
 
@@ -58,7 +59,7 @@ O projeto inclui `vercel.json` com rewrites configurados para o React Router fun
 
 ```
 src/
-├── __tests__/          # testes unitários (Card, SearchBar, FavoritesContext)
+├── __tests__/          # testes unitários (Card, Filters, EventDetail, Header, MainPage, contextos)
 ├── assets/             # ícones e imagens estáticas
 ├── components/
 │   ├── Card/           # card de evento, skeleton, tags
@@ -68,6 +69,7 @@ src/
 │   └── Login/          # formulário de login
 ├── context/
 │   ├── FavoritesContext.tsx
+│   ├── RSVPContext.tsx
 │   └── ThemeContext.tsx
 ├── data/
 │   └── events.ts       # 70+ eventos com categoria, preço e imagem

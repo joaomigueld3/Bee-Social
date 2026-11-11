@@ -5,8 +5,8 @@
 ## T-001 — Base de testes e limpeza de código morto [concluida]
 
 - Refs: US-001
-- Arquivos: src/setupTests.ts, src/components/Login/Login.tsx, src/components/Login/Login.css, src/styles/App.css
-- Notas: `beforeEach(() => localStorage.clear())` e stub de `window.matchMedia` no setup; apagar `Login/` e `App.css` (não importados). Pré-requisito das demais.
+- Arquivos: src/setupTests.ts
+- Notas: `beforeEach(() => localStorage.clear())`, stub de `window.matchMedia` e `Storage` em memória (Node 22+) no setup; apagados `src/components/Login/` e `src/styles/App.css` (não importados). Pré-requisito das demais.
 
 ## T-002 — Contexto de presenças [concluida]
 
@@ -38,7 +38,7 @@
 - Arquivos: src/components/Filters/Filters.tsx, src/components/Filters/Filters.css, src/pages/MainPage.tsx, src/__tests__/Filters.test.tsx, src/__tests__/MainPage.test.tsx
 - Notas: depende de T-002 e de ASM-003. Não vai para a URL (Q-001).
 
-## T-007 — Documentação [pendente]
+## T-007 — Documentação [concluida]
 
 - Refs: US-001
 - Arquivos: CLAUDE.md, README.md, TODO.md
