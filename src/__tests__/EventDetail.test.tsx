@@ -2,6 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import EventDetail from '../components/EventDetail/EventDetail';
 import { FavoritesProvider } from '../context/FavoritesContext';
+import { RSVPProvider } from '../context/RSVPContext';
 import { Event } from '../types';
 
 const mockEvent: Event = {
@@ -22,7 +23,9 @@ const mockEvent: Event = {
 function renderDetail(onClose = vi.fn(), event: Event = mockEvent) {
   render(
     <FavoritesProvider>
-      <EventDetail event={event} onClose={onClose} />
+      <RSVPProvider>
+        <EventDetail event={event} onClose={onClose} />
+      </RSVPProvider>
     </FavoritesProvider>
   );
   return onClose;
@@ -92,5 +95,16 @@ describe('EventDetail', () => {
   it('omits the ticket link when the event has none', () => {
     renderDetail(vi.fn(), { ...mockEvent, link: '' });
     expect(screen.queryByRole('link', { name: /Comprar ingresso/i })).not.toBeInTheDocument();
+  });
+
+  it('@spec:AC-007 o botão de presença alterna entre confirmar e cancelar', () => {
+    renderDetail();
+    fireEvent.click(screen.getByRole('button', { name: 'Confirmar Presença' }));
+
+    const confirmed = screen.getByRole('button', { name: '✓ Presença Confirmada (Cancelar)' });
+    expect(confirmed).toBeInTheDocument();
+
+    fireEvent.click(confirmed);
+    expect(screen.getByRole('button', { name: 'Confirmar Presença' })).toBeInTheDocument();
   });
 });

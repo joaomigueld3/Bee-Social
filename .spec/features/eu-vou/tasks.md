@@ -14,19 +14,19 @@
 - Arquivos: src/context/RSVPContext.tsx, src/App.tsx, src/__tests__/RSVPContext.test.tsx
 - Notas: `useRSVP()` com `isAttending`, `toggleAttendance`, `confirmedCount`, `confirmedEventIds`; persistência em `bee_social_rsvp`, mesmo padrão do `FavoritesContext`. Depende de T-001.
 
-## T-003 — Indicador de presenças no Header [pendente]
+## T-003 — Indicador de presenças no Header [concluida]
 
 - Refs: US-002, AC-004
 - Arquivos: src/components/Header/Header.tsx, src/components/Header/Header.css, src/__tests__/Header.test.tsx
 - Notas: depende de T-002. Indicador só informativo, não é link (Q-003).
 
-## T-004 — Botão e selo de presença no Card [pendente]
+## T-004 — Botão e selo de presença no Card [concluida]
 
 - Refs: US-003, AC-005, AC-006
 - Arquivos: src/components/Card/Card.tsx, src/components/Card/Card.css, src/__tests__/Card.test.tsx
 - Notas: botão com `stopPropagation`, como o de favorito. Depende de T-002.
 
-## T-005 — Botão de presença no detalhe do evento [pendente]
+## T-005 — Botão de presença no detalhe do evento [concluida]
 
 - Refs: US-004, AC-007
 - Arquivos: src/components/EventDetail/EventDetail.tsx, src/components/EventDetail/EventDetail.css, src/__tests__/EventDetail.test.tsx

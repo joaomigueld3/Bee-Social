@@ -199,3 +199,18 @@
   background: #f2ec54;
   color: #18181b;
 }
+
+.detailRsvpBtn {
+  cursor: pointer;
+}
+
+.detailRsvpBtn.active {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #fff;
+}
+
+.detailRsvpBtn.active:hover {
+  background: #15803d;
+  border-color: #15803d;
+}
