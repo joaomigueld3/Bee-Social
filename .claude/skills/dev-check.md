@@ -5,9 +5,10 @@ description: Verificação completa do projeto (tipos, testes, vulnerabilidades,
 
 ## 1. Checagem automática
 
-Rode `npm run check` (chama `scripts/project-check.mjs --full`). Ele executa:
-`tsc`, `vitest`, `npm audit`, checagem do `.gitignore`, arquivos sensíveis versionados,
-varredura de padrões XSS/injeção em `src/` e detecção de arquivos não usados, e regenera o bloco AUTO do `CLAUDE.md`.
+Rode, na ordem (é o mesmo que o CI em `.github/workflows/ci.yml`):
+`npm run typecheck`, `npm test -- --run`, `npm run build`, `npm audit --audit-level=high`, `npm run spec:audit`
+(o último aplica a constituição em `.spec/constituicao.md`: segredos e padrões de XSS proibidos).
+Confira também o `.gitignore` (`node_modules`, `dist`, `.env`) e `git ls-files | grep -E '\.env|\.pem|\.key'`.
 
 ## 2. Análise que o script não faz (leia o código)
 
@@ -25,7 +26,7 @@ Para código novo sem cobertura, escreva os testes seguindo o padrão dos existe
 ## 4. CLAUDE.md
 
 Compare as seções narrativas (Arquitetura, Componentes, Testes, Dívidas conhecidas) com o código atual e corrija o que divergiu.
-Remova dívidas resolvidas; adicione as novas. Não edite o bloco AUTO.
+Remova dívidas resolvidas; adicione as novas.
 
 ## 5. Relatório
 

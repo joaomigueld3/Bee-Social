@@ -8,8 +8,9 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "docs:sync": "node scripts/project-check.mjs --sync",
-    "check": "node scripts/project-check.mjs --full"
+    "typecheck": "tsc --noEmit",
+    "spec:audit": "node .claude/skills/onp-spec-driven/scripts/onp-spec.mjs audit --ci",
+    "spec": "node .claude/skills/onp-spec-driven/scripts/onp-spec.mjs"
   },
   "dependencies": {
     "react": "^18.0.0",

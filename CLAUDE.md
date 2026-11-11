@@ -15,18 +15,34 @@ App de descoberta de eventos culturais/musicais no Brasil. **Projeto de portfól
 ```bash
 npm run dev            # http://localhost:5173
 npm test -- --run      # testes (sem watch)
-npx tsc --noEmit       # checagem de tipos (rodar antes de concluir qualquer mudança)
+npm run typecheck      # tsc --noEmit (rodar antes de concluir qualquer mudança)
 npm run build          # tsc && vite build
-npm run check          # tipos + testes + npm audit + .gitignore + varredura XSS + arquivos não usados
-npm run docs:sync      # regenera o bloco AUTO deste arquivo (sem rodar testes)
+npm audit --audit-level=high
+npm run spec:audit     # onp-spec audit --ci (specs, provas e constituição)
+npm run spec -- <cmd>  # CLI do onp-spec (new, scaffold, verify, status, resumo…)
 ```
 
-## Manutenção automática deste arquivo
+## Qualidade e CI
 
-- O bloco entre `AUTO:START` e `AUTO:END` (no fim) é **gerado** por `scripts/project-check.mjs` — nunca edite à mão. Contém contagem de eventos/testes, scripts npm, árvore de arquivos e arquivos possivelmente não usados.
-- **Hook Stop** (`.claude/settings.json`): ao fim de cada resposta, se `src/` ou `package.json` mudaram, roda `tsc` + `vitest` e resincroniza o bloco. Se a estrutura mudou (arquivo criado/removido, teste novo, script novo), o hook bloqueia com exit 2 e pede que você **revise as seções narrativas** (Arquitetura, Componentes, Testes, Dívidas). Faça isso e termine; na segunda passada o hook não bloqueia de novo.
-- **Git hook** (opcional, o usuário ativa com `git config core.hooksPath .githooks`): `.githooks/pre-commit` recusa o commit se `CLAUDE.md` estiver desatualizado, ou se tipos/testes falharem.
-- Ao concluir uma tarefa que muda comportamento, atualize as seções narrativas relevantes (e a lista de dívidas: remova o que foi resolvido).
+- `.github/workflows/ci.yml` roda em push para `main`/`develop` e em todo PR: typecheck → testes → build → `npm audit --audit-level=high` → `spec:audit`. Tudo bloqueia.
+- `.github/workflows/codeql.yml`: análise estática de segurança (push, PR e semanal). `.github/dependabot.yml`: PRs semanais de dependências para `develop`.
+- Skill `.claude/skills/dev-check.md` roda o mesmo localmente e revisa o que a automação não pega.
+- Ao concluir uma tarefa que muda comportamento, atualize as seções narrativas deste arquivo (e remova dívidas resolvidas).
+
+## Spec-driven (onp-spec)
+
+Skill em `.claude/skills/onp-spec-driven/` (leia o `SKILL.md` antes de usar). Specs em `.spec/features/<feature>/`, constituição em `.spec/constituicao.md` (P-001 provas, P-002 segredos, P-003 anti-XSS). Config em `onpspec.config.json` (Vitest com `--reporter=tap-flat`).
+
+**Feature nova = spec antes do código.** Ciclo:
+1. `npm run spec -- new <feature>` (`--grande` se cruza domínios/contratos) → completar `spec.md` (US/AC Dado/Quando/Então, Suposições, Perguntas) e `tasks.md` (`Refs:`, `Arquivos:`).
+2. `npm run spec -- scaffold <feature>` → testes que falham, com `@spec:AC-xxx` no título.
+3. Implementar tarefa a tarefa; `npm run spec -- tarefa <feature> T-xxx concluida`.
+4. Só fecha com `npm run spec -- verify <feature>` + `npm run spec:audit` saindo 0. Nunca pule/apague teste para passar.
+Decisões de produto em aberto (Q-xxx) são perguntadas ao usuário, nunca inventadas.
+
+- Como o CI bloqueia, uma feature em andamento (ACs sem prova, testes do scaffold falhando) **só existe na sua branch** e só vai para `develop` com `verify` + `spec:audit` verdes.
+- O `scaffold` gera testes em `test/<feature>.spec.test.js`. Prefira escrever as provas em `src/__tests__/` com Testing Library, mantendo `@spec:AC-xxx` no título.
+- O código anterior ao onp-spec está em `ignoreGlobs` no `onpspec.config.json`, para não exigir spec retroativa. Arquivo novo em `src/` precisa estar em `Arquivos:` de alguma tarefa.
 
 ## Arquitetura
 
@@ -131,38 +147,3 @@ Quando avisar:
 Mensagens de commit: Conventional Commits em inglês (`feat:`, `fix:`, `style:`, `refactor:`, `test:`, `docs:`, `chore:`), uma linha, no imperativo, sempre em bloco de código. Commits pequenos e temáticos; não misture feature com refactor.
 - Existe um skill de projeto em `.claude/skills/dev-check.md` (npm audit + varredura OWASP no código + checagem do `.gitignore` + testes). Skills de projeto podem não ser invocáveis com `/dev-check` no app desktop; nesse caso, execute os passos do arquivo manualmente.
 - `dist/` e `.vercel/` estão no `.gitignore`.
-
-<!-- AUTO:START (gerado por scripts/project-check.mjs — não edite à mão) -->
-<!-- structure-hash: c1aff87324 -->
-## Snapshot automático
-
-- **Eventos mock:** 69 (23 com `imageUrl`, 7 são miniaturas do Google)
-- **Testes:** 26 em 4 arquivos — Card.test.tsx (5), EventDetail.test.tsx (9), FavoritesContext.test.tsx (3), Filters.test.tsx (9)
-- **Scripts npm:** `dev`, `build`, `preview`, `test`, `test:ui`, `docs:sync`, `check`
-- **Arquivos possivelmente não usados:** `src/components/Login/Login.tsx`, `src/styles/App.css`
-
-```
-src/App.tsx
-src/__tests__/Card.test.tsx
-src/__tests__/EventDetail.test.tsx
-src/__tests__/FavoritesContext.test.tsx
-src/__tests__/Filters.test.tsx
-src/components/Card/Card.tsx
-src/components/Card/Skeleton.tsx
-src/components/Card/TagItem.tsx
-src/components/EventDetail/EventDetail.tsx
-src/components/Filters/Filters.tsx
-src/components/Header/Header.tsx
-src/components/Login/Login.tsx
-src/context/FavoritesContext.tsx
-src/context/ThemeContext.tsx
-src/data/events.ts
-src/main.tsx
-src/pages/FavoritesPage.tsx
-src/pages/LandingPage.tsx
-src/pages/MainPage.tsx
-src/setupTests.ts
-src/types/index.ts
-src/vite-env.d.ts
-```
-<!-- AUTO:END -->
