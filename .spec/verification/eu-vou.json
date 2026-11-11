@@ -1,7 +1,7 @@
 {
   "feature": "eu-vou",
-  "timestamp": "2026-11-11T22:48:55.332Z",
-  "gitRev": "b8bb801",
+  "timestamp": "2026-11-11T22:56:05.461Z",
+  "gitRev": "907c2a6",
   "command": "npx vitest run --reporter=tap-flat",
   "reporter": "tap",
   "exitCode": 0,
@@ -9,52 +9,52 @@
   "results": {
     "AC-001": {
       "status": "pass",
-      "testName": "src/__tests__/RSVPContext.test.tsx > RSVPContext > @spec:AC-001 confirmar presença registra o evento e o total vira 1 # time=246.00ms",
+      "testName": "src/__tests__/RSVPContext.test.tsx > RSVPContext > @spec:AC-001 confirmar presença registra o evento e o total vira 1 # time=604.00ms",
       "method": "tap"
     },
     "AC-002": {
       "status": "pass",
-      "testName": "src/__tests__/RSVPContext.test.tsx > RSVPContext > @spec:AC-002 confirmar de novo cancela a presença e o total volta a 0 # time=56.00ms",
+      "testName": "src/__tests__/RSVPContext.test.tsx > RSVPContext > @spec:AC-002 confirmar de novo cancela a presença e o total volta a 0 # time=193.00ms",
       "method": "tap"
     },
     "AC-003": {
       "status": "pass",
-      "testName": "src/__tests__/RSVPContext.test.tsx > RSVPContext > @spec:AC-003 presenças sobrevivem a um recarregamento # time=88.00ms",
+      "testName": "src/__tests__/RSVPContext.test.tsx > RSVPContext > @spec:AC-003 presenças sobrevivem a um recarregamento # time=119.00ms",
       "method": "tap"
     },
     "AC-004": {
       "status": "pass",
-      "testName": "src/__tests__/Header.test.tsx > Header > @spec:AC-004 mostra o total de presenças e atualiza na hora # time=293.00ms",
+      "testName": "src/__tests__/Header.test.tsx > Header > @spec:AC-004 mostra o total de presenças e atualiza na hora # time=673.00ms",
       "method": "tap"
     },
     "AC-005": {
       "status": "pass",
-      "testName": "src/__tests__/Card.test.tsx > Card > @spec:AC-005 o botão de presença confirma sem abrir o detalhe # time=249.00ms",
+      "testName": "src/__tests__/Card.test.tsx > Card > @spec:AC-005 o botão de presença confirma sem abrir o detalhe # time=60.00ms",
       "method": "tap"
     },
     "AC-006": {
       "status": "pass",
-      "testName": "src/__tests__/Card.test.tsx > Card > @spec:AC-006 card confirmado mostra o selo \"Eu vou\" junto dos outros selos # time=164.00ms",
+      "testName": "src/__tests__/Card.test.tsx > Card > @spec:AC-006 card confirmado mostra o selo \"Eu vou\" junto dos outros selos # time=55.00ms",
       "method": "tap"
     },
     "AC-007": {
       "status": "pass",
-      "testName": "src/__tests__/EventDetail.test.tsx > EventDetail > @spec:AC-007 o botão de presença alterna entre confirmar e cancelar # time=241.00ms",
+      "testName": "src/__tests__/EventDetail.test.tsx > EventDetail > @spec:AC-007 o botão de presença alterna entre confirmar e cancelar # time=82.00ms",
       "method": "tap"
     },
     "AC-008": {
       "status": "pass",
-      "testName": "src/__tests__/Filters.test.tsx > Filters > @spec:AC-008 o botão \"Só confirmados\" liga o filtro # time=232.00ms",
+      "testName": "src/__tests__/Filters.test.tsx > Filters > @spec:AC-008 o botão \"Só confirmados\" liga o filtro # time=95.00ms",
       "method": "tap"
     },
     "AC-009": {
       "status": "pass",
-      "testName": "src/__tests__/MainPage.test.tsx > MainPage — filtro \"Só confirmados\" > @spec:AC-009 cancelar a presença com o filtro ativo tira o evento da lista na hora # time=1130.00ms",
+      "testName": "src/__tests__/MainPage.test.tsx > MainPage — filtro \"Só confirmados\" > @spec:AC-009 cancelar a presença com o filtro ativo tira o evento da lista na hora # time=1933.00ms",
       "method": "tap"
     },
     "AC-010": {
       "status": "pass",
-      "testName": "src/__tests__/Filters.test.tsx > Filters > @spec:AC-010 \"Limpar\" desliga o \"Só confirmados\" e a contagem soma 1 # time=268.00ms",
+      "testName": "src/__tests__/Filters.test.tsx > Filters > @spec:AC-010 \"Limpar\" desliga o \"Só confirmados\" e a contagem soma 1 # time=70.00ms",
       "method": "tap"
     }
   },
