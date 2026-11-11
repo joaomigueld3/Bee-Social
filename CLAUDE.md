@@ -4,9 +4,9 @@ App de descoberta de eventos culturais/musicais no Brasil. **Projeto de portfól
 
 ## Stack
 
-- React 18 + TypeScript 4.6 + Vite 5 (`@vitejs/plugin-react` v4)
+- React 18 + TypeScript 4.6 + Vite 7 (`@vitejs/plugin-react` v4; exige Node ≥ 20.19)
 - React Router v6 (`BrowserRouter`)
-- Vitest + Testing Library + jsdom
+- Vitest 4 + Testing Library + jsdom
 - CSS puro com variáveis (sem UI lib, sem CSS-in-JS)
 - Sem gerenciador de estado externo: só Context API
 
@@ -115,7 +115,7 @@ Antes de dar algo por concluído: `npx tsc --noEmit` e `npm test -- --run` devem
 
 ## Dívidas conhecidas / pendências
 
-1. **Dependências:** `npm audit` reporta 7 vulns (3 critical/high em `vite`, `vitest`, `form-data`), todas só de dev/build — não afetam o bundle de produção. `npm audit fix` resolve sem breaking changes.
+1. **Dependências:** `npm audit --audit-level=high` (gate do CI) passa. Restam 2 moderate em `react-router-dom` 6 (open redirect via `\` em `<Link>`/`useNavigate`, GHSA-wrjc-x8rr-h8h6); a correção é a v7 (major), ainda não feita. O app só navega para caminhos fixos, então o risco prático é baixo.
 2. **Imagens:** `imageUrl` vem de fontes mistas. Algumas URLs (`encrypted-tbn0.gstatic.com`, Khalid/Rafinha Bastos/Arctic Monkeys) são miniaturas do Google de baixa resolução e ficam borradas no banner; o usuário adiciona URLs manualmente e **quer preservá-las** — não sobrescreva `imageUrl` existentes sem pedir. Alguns hosts podem bloquear hotlink. Unsplash sem autenticação retorna 404; Pexels CDN funciona.
 3. **README:** screenshots (`src/assets/print-screen*.png`) são antigas.
 4. `Filters.tsx` exporta a constante `CITIES` e o componente; a landing importa dele (acoplamento aceitável, mas poderia ir para `src/data`).
