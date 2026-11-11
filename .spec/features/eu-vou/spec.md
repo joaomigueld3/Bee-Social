@@ -100,9 +100,9 @@ Como visitante, quero filtrar a lista para só os eventos em que vou, para consu
 
 | ID | Suposição | Status | Resolução |
 |---|---|---|---|
-| ASM-001 | Presença é independente de favorito: um evento pode estar em um, no outro ou nos dois | aberta | — |
-| ASM-002 | Eventos passados também podem receber presença (o mock mistura 2022 e 2026–2027) | aberta | — |
-| ASM-003 | O filtro "Só confirmados" faz parte do `FilterState`: conta em `countActiveFilters` e é zerado por "Limpar" | aberta | — |
+| ASM-001 | Presença é independente de favorito: um evento pode estar em um, no outro ou nos dois | confirmada | Confirmado pelo usuário em 2026-11-11. |
+| ASM-002 | Eventos passados também podem receber presença (o mock mistura 2022 e 2026–2027) | confirmada | Confirmado pelo usuário em 2026-11-11. |
+| ASM-003 | O filtro "Só confirmados" faz parte do `FilterState`: conta em `countActiveFilters` e é zerado por "Limpar" | confirmada | Opção A: entra no FilterState; "Limpar" desliga e a contagem soma 1 (usuário, 2026-11-11). |
 
 ## Perguntas em aberto
 

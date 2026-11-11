@@ -125,9 +125,9 @@ Antes de dar algo por concluído: `npx tsc --noEmit` e `npm test -- --run` devem
 - Prefira explicar brevemente o que vai fazer antes de mudanças visuais/grandes.
 - O backlog do projeto fica em `TODO.md`. Ao começar uma tarefa, mova o item para "Em andamento"; ao terminar, marque `[x]` e mova para "Feito". Ideias novas que surgirem vão para "Próximos" com prioridade.
 
-### Git flow (commits manuais)
+### Git flow
 
-**O usuário faz todas as operações de git manualmente.** Nunca rode `git commit`, `git push`, `git merge`, `git checkout`/`switch` ou `git branch`. Seu papel é **avisar** o que fazer e em que momento, com os comandos prontos em blocos `bash` (um comando por bloco).
+**O Claude executa o git** (branch, add, commit, merge, push), seguindo as regras abaixo. Nunca use `--force`, `reset --hard`, `--no-verify` nem `git add .`/`-A` (adicione arquivos por caminho). **Não apague branches remotas nem tags, e não faça merge em `main`, sem pedir confirmação.** Mostre o que foi feito. Se aparecer algo inesperado (alterações não commitadas, conflito), pare e explique antes de agir.
 
 Branches:
 - `main` — produção. A Vercel publica daqui. Só recebe merge de `release/*` e `hotfix/*`.
@@ -139,9 +139,9 @@ Branches:
 - Nomes em inglês, kebab-case (`feature/event-sorting`). Cada item do `TODO.md` = uma branch.
 
 Quando avisar:
-1. **Antes de começar uma tarefa:** confira a branch atual (`git branch --show-current`). Se estiver em `main` ou `develop`, **pare e peça** para o usuário criar a branch certa antes de editar, com o comando (ex.: `git switch develop` e depois `git switch -c feature/event-sorting`).
-2. **A cada unidade lógica concluída** (tipos + testes passando): avise que é um bom ponto de commit. Liste os arquivos a adicionar (`git add` com caminhos específicos, nunca `git add .`) e a mensagem.
-3. **Ao terminar a tarefa:** passe o roteiro de fechamento: último commit → `git switch develop` → `git merge --no-ff feature/<nome>` → `git push origin develop` → apagar a branch local.
+1. **Antes de começar uma tarefa:** confira a branch atual (`git branch --show-current`) e o `git status`. Se estiver em `main` ou `develop`, crie a branch certa a partir de `develop` (`git switch -c feature/<nome>`) antes de editar.
+2. **A cada unidade lógica concluída** (tipos + testes passando): faça o commit, com `git add` por caminho e mensagem Conventional Commits.
+3. **Ao terminar a tarefa** (CI local verde): confirme com o usuário e então `git switch develop` → `git merge --no-ff feature/<nome>` → `git push origin develop` → apagar a branch local.
 4. **Quando `develop` tiver um conjunto que vale publicar:** sugira abrir `release/x.y.z`, atualizar README/screenshots se preciso, e fazer merge em `main` com tag.
 
 Mensagens de commit: Conventional Commits em inglês (`feat:`, `fix:`, `style:`, `refactor:`, `test:`, `docs:`, `chore:`), uma linha, no imperativo, sempre em bloco de código. Commits pequenos e temáticos; não misture feature com refactor.

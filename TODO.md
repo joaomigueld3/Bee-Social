@@ -6,7 +6,7 @@ Feature nova passa pelo onp-spec (spec → scaffold → implementação → `ver
 Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o merge em `develop`.
 
 ## Em andamento
-- [ ] **P1** `feature/onp-spec-ci` — onp-spec configurado para Vitest, constituição (P-002/P-003), CI + CodeQL + Dependabot, limpeza das referências ao `project-check`
+- [ ] **P1** `feature/rsvp` — implementar T-001…T-007 de `.spec/features/eu-vou/` (spec completa, perguntas e suposições respondidas). Próximo: T-001.
 
 ## Próximos (ordenados)
 
@@ -15,7 +15,6 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 - [ ] **P2** `feature/refresh-screenshots` — screenshots do README estão antigas (landing, filtros, modal, dark mode)
 
 ### Funcionalidades
-- [ ] **P1** `feature/rsvp` — "Eu Vou" (RSVP). Spec pronta em `.spec/features/eu-vou/` (US-001…005, AC-001…010, T-001…007; fonte: `SPECS-RSVP.md`). Antes de implementar, responder Q-001 (filtro na URL?), Q-002 (página `/presencas`?), Q-003 (indicador do Header é link?) e confirmar ASM-001…003. O T-001 já inclui a remoção do código morto (`Login/`, `App.css`).
 - [ ] **P3** `feature/event-sorting` — ordenação (data, preço) e "ocultar eventos passados"
 - [ ] **P3** `feature/url-filters-sync` — sincronizar filtros com a URL depois da montagem (hoje só lê na montagem)
 - [ ] **P3** `feature/artist-page` — página de artista (hoje o carrossel só filtra por `?search=`)
@@ -35,3 +34,5 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 - [x] Landing page (animações, carrossel clicável, botões de categoria/cidade)
 - [x] Testes: Card, Filters, EventDetail, FavoritesContext (26)
 - [x] `CLAUDE.md` e git flow; `develop` criada
+- [x] onp-spec + Vitest, constituição (P-002/P-003), CI, CodeQL e Dependabot (`feature/onp-spec-ci`)
+- [x] Spec do RSVP (`.spec/features/eu-vou/`)
