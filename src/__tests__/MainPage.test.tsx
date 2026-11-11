@@ -1,37 +1,43 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen, fireEvent, within } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import MainPage from '../pages/MainPage';
 import { ThemeProvider } from '../context/ThemeContext';
 import { FavoritesProvider } from '../context/FavoritesContext';
 import { RSVPProvider } from '../context/RSVPContext';
-import { allEvents } from '../data/events';
+import { allEvents, allEventsByCity } from '../data/events';
 
-const confirmedIds = [allEvents[0].id, allEvents[1].id];
+// Uma cidade só mantém a página leve: getByRole em dezenas de cards estoura o timeout no jsdom
+const cityEvents = allEventsByCity['Recife'];
+const confirmedIds = [cityEvents[0].id, cityEvents[1].id];
+
+function LocationProbe() {
+  return <span data-testid="search">{useLocation().search}</span>;
+}
 
 async function renderMainPage() {
   localStorage.setItem('bee_social_rsvp', JSON.stringify(confirmedIds));
   render(
-    <MemoryRouter initialEntries={['/events']}>
+    <MemoryRouter initialEntries={['/events?city=Recife']}>
       <ThemeProvider>
         <FavoritesProvider>
           <RSVPProvider>
             <MainPage />
+            <LocationProbe />
           </RSVPProvider>
         </FavoritesProvider>
       </ThemeProvider>
     </MemoryRouter>
   );
-  await screen.findAllByRole('heading', { level: 3 });
+  await waitFor(() => expect(cardCount()).toBe(cityEvents.length));
 }
 
-const cardCount = () => screen.queryAllByRole('heading', { level: 3 }).length;
+const cardCount = () => document.querySelectorAll('.cardItem').length;
 const onlyConfirmedBtn = () => screen.getByRole('button', { name: /só confirmados/i });
 
 describe('MainPage — filtro "Só confirmados"', () => {
   it('@spec:AC-008 restringe a lista aos eventos confirmados', async () => {
     await renderMainPage();
-    expect(cardCount()).toBe(allEvents.length);
 
     fireEvent.click(onlyConfirmedBtn());
 
@@ -57,13 +63,14 @@ describe('MainPage — filtro "Só confirmados"', () => {
     fireEvent.click(screen.getByRole('button', { name: /limpar/i }));
 
     expect(onlyConfirmedBtn()).toHaveAttribute('aria-pressed', 'false');
-    expect(cardCount()).toBe(allEvents.length);
+    // "Limpar" também zera a cidade: sai o skeleton (500 ms) e voltam os eventos de todas as cidades
+    await waitFor(() => expect(cardCount()).toBe(allEvents.length), { timeout: 3000 });
   });
 
   it('o filtro não vai para a URL', async () => {
     await renderMainPage();
     fireEvent.click(onlyConfirmedBtn());
-    expect(window.location.search).not.toContain('rsvp');
+    expect(screen.getByTestId('search').textContent).toBe('?city=Recife');
   });
 
   it('o contador de presenças do topo acompanha os cards', async () => {
