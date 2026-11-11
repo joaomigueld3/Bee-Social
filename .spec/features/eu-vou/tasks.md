@@ -32,7 +32,7 @@
 - Arquivos: src/components/EventDetail/EventDetail.tsx, src/components/EventDetail/EventDetail.css, src/__tests__/EventDetail.test.tsx
 - Notas: posicionar junto de "Salvar na Agenda". Depende de T-002.
 
-## T-006 — Filtro "Só confirmados" [pendente]
+## T-006 — Filtro "Só confirmados" [concluida]
 
 - Refs: US-005, AC-008, AC-009, AC-010
 - Arquivos: src/components/Filters/Filters.tsx, src/components/Filters/Filters.css, src/pages/MainPage.tsx, src/__tests__/Filters.test.tsx, src/__tests__/MainPage.test.tsx

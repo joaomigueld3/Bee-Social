@@ -20,8 +20,9 @@ describe('countActiveFilters', () => {
       category: 'Rock',
       price: 'Gratuito',
       period: 'Noite',
+      onlyConfirmed: true,
     };
-    expect(countActiveFilters(filters)).toBe(5);
+    expect(countActiveFilters(filters)).toBe(6);
   });
 
   it('ignores whitespace-only search', () => {
@@ -65,5 +66,24 @@ describe('Filters', () => {
     const onChange = renderFilters({ category: 'Rock', search: 'test' });
     fireEvent.click(screen.getByText(/Limpar/));
     expect(onChange).toHaveBeenCalledWith(INITIAL_FILTERS);
+  });
+
+  it('@spec:AC-008 o botão "Só confirmados" liga o filtro', () => {
+    const onChange = renderFilters();
+    const btn = screen.getByRole('button', { name: /só confirmados/i });
+    expect(btn).toHaveAttribute('aria-pressed', 'false');
+    fireEvent.click(btn);
+    expect(onChange).toHaveBeenCalledWith({ ...INITIAL_FILTERS, onlyConfirmed: true });
+  });
+
+  it('@spec:AC-010 "Limpar" desliga o "Só confirmados" e a contagem soma 1', () => {
+    const onChange = renderFilters({ onlyConfirmed: true });
+    expect(screen.getByRole('button', { name: /só confirmados/i })).toHaveAttribute('aria-pressed', 'true');
+    expect(countActiveFilters({ ...INITIAL_FILTERS, onlyConfirmed: true })).toBe(1);
+
+    fireEvent.click(screen.getByText(/Limpar/));
+
+    expect(onChange).toHaveBeenCalledWith(INITIAL_FILTERS);
+    expect(INITIAL_FILTERS.onlyConfirmed).toBe(false);
   });
 });

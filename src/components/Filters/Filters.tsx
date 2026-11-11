@@ -9,6 +9,7 @@ export interface FilterState {
   category: EventCategory | 'Todos';
   price: EventPrice | 'Todos';
   period: PeriodFilter;
+  onlyConfirmed: boolean;
 }
 
 export const INITIAL_FILTERS: FilterState = {
@@ -17,6 +18,7 @@ export const INITIAL_FILTERS: FilterState = {
   category: 'Todos',
   price: 'Todos',
   period: 'Todos',
+  onlyConfirmed: false,
 };
 
 export const CITIES = [
@@ -53,7 +55,8 @@ export function countActiveFilters(f: FilterState): number {
     (f.search.trim() ? 1 : 0) +
     (f.category !== 'Todos' ? 1 : 0) +
     (f.price !== 'Todos' ? 1 : 0) +
-    (f.period !== 'Todos' ? 1 : 0)
+    (f.period !== 'Todos' ? 1 : 0) +
+    (f.onlyConfirmed ? 1 : 0)
   );
 }
 
@@ -143,6 +146,15 @@ export default function Filters({ filters, onChange, total, filtered }: FiltersP
               ))}
             </select>
           </div>
+
+          <button
+            type="button"
+            className={`pill onlyConfirmedBtn ${filters.onlyConfirmed ? 'pillActive' : ''}`}
+            onClick={() => set({ onlyConfirmed: !filters.onlyConfirmed })}
+            aria-pressed={filters.onlyConfirmed}
+          >
+            ✓ Só confirmados
+          </button>
 
         </div>
 
