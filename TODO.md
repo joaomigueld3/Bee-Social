@@ -11,7 +11,6 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 ## Próximos (ordenados)
 
 ### Manutenção
-- [ ] **P1** `feature/audit-fix` — `npm audit fix` (2 critical + 1 high, só dev). **Pré-requisito para o CI ficar verde.**
 - [ ] **P2** `feature/refresh-screenshots` — screenshots do README estão antigas (landing, filtros, modal, dark mode)
 
 ### Funcionalidades
@@ -22,6 +21,7 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 - [ ] **P3** `feature/seo-meta` — meta tags/Open Graph, favicon, domínio próprio
 
 ### Qualidade
+- [ ] **P2** `feature/react-router-7` — subir `react-router-dom` 6 → 7 (2 moderate no `npm audit`; checar compatibilidade com TypeScript 4.6)
 - [ ] **P2** `feature/landing-mainpage-tests` — testes de `LandingPage` (`goToEvents`, redirect se logado) e `MainPage` (`matchesPeriod`, filtros via URL)
 - [ ] **P3** `feature/theme-header-tests` — testes de `ThemeContext` e `Header` (o do Header já veio com o RSVP)
 - [ ] **P2** `bugfix/event-images` — trocar as 7 miniaturas do Google (`encrypted-tbn0…`) por imagens de resolução real (não sobrescrever as do usuário sem pedir)
@@ -37,3 +37,4 @@ Fluxo: mova o item para "Em andamento" ao começar e para "Feito" ao fazer o mer
 - [x] onp-spec + Vitest, constituição (P-002/P-003), CI, CodeQL e Dependabot (`feature/onp-spec-ci`)
 - [x] Spec do RSVP (`.spec/features/eu-vou/`)
 - [x] Eu vou / RSVP: presença por card e detalhe, total no Header, filtro "Só confirmados"; 45 testes, 10/10 ACs provados (`feature/rsvp`)
+- [x] `feature/audit-fix`: `npm audit fix` + Vite 5→7 e Vitest 1→4 (gate `--audit-level=high` verde)

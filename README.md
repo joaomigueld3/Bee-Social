@@ -28,7 +28,7 @@ Plataforma de descoberta de eventos musicais por cidade — projeto construído 
 ## Tecnologias 🛠️
 
 - [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
-- [Vite 5](https://vitejs.dev/) — build tool
+- [Vite 7](https://vitejs.dev/) — build tool
 - [React Router v6](https://reactrouter.com/) — navegação client-side
 - [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/) — testes unitários
 - CSS puro com variáveis de tema
