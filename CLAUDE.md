@@ -24,7 +24,7 @@ npm run spec -- <cmd>  # CLI do onp-spec (new, scaffold, verify, status, resumo�
 
 ## Qualidade e CI
 
-- `.github/workflows/ci.yml` roda em push para `main`/`develop` e em todo PR: typecheck → testes → build → `npm audit --audit-level=high` → `spec:audit`. Tudo bloqueia.
+- `.github/workflows/ci.yml` roda em push para `main`/`develop` e em todo PR: typecheck → testes → build → `npm audit --audit-level=high` → `verify` de cada feature → `spec:audit`. Tudo bloqueia. O `verify` roda no CI porque o `audit` considera a prova obsoleta quando algum arquivo de `src`/testes tem mtime mais novo que o `verify` (um checkout limpo sempre tem); localmente, `git switch`/merge também invalidam a prova: rode `npm run spec -- verify <feature>` antes do `spec:audit`, sem precisar commitar o `.json` de novo.
 - `.github/workflows/codeql.yml`: análise estática de segurança (push, PR e semanal). `.github/dependabot.yml`: PRs semanais de dependências para `develop`.
 - Skill `.claude/skills/dev-check.md` roda o mesmo localmente e revisa o que a automação não pega.
 - Ao concluir uma tarefa que muda comportamento, atualize as seções narrativas deste arquivo (e remova dívidas resolvidas).

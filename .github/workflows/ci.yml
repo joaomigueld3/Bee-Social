@@ -26,5 +26,10 @@ jobs:
         run: npm run build
       - name: Vulnerabilidades de dependências
         run: npm audit --audit-level=high
+      - name: Provas das specs (onp-spec verify)
+        run: |
+          for dir in .spec/features/*/; do
+            npm run spec -- verify "$(basename "$dir")"
+          done
       - name: Auditoria de specs (onp-spec)
         run: npm run spec:audit
