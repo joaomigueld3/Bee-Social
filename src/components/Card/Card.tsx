@@ -2,6 +2,7 @@ import './Card.css';
 import TagItem from './TagItem';
 import { Event } from '../../types';
 import { useFavorites } from '../../context/FavoritesContext';
+import { useRSVP } from '../../context/RSVPContext';
 
 interface CardProps {
   event: Event;
@@ -26,6 +27,8 @@ function getDateBadge(dateStr: string): { label: string; className: string } | n
 export default function Card({ event, index, onClick }: CardProps) {
   const { isFavorite, toggle } = useFavorites();
   const favorite = isFavorite(event.id);
+  const { isAttending, toggleAttendance } = useRSVP();
+  const attending = isAttending(event.id);
   const badge = getDateBadge(event.eventDate);
 
   return (
@@ -43,15 +46,27 @@ export default function Card({ event, index, onClick }: CardProps) {
           {badge && <span className={`badge ${badge.className}`}>{badge.label}</span>}
           <span className="badgeCategory">{event.category}</span>
           <span className="badgePrice">{event.price}</span>
+          {attending && <span className="badgeAttending">Eu vou</span>}
         </div>
-        <button
-          className={`favoriteBtn ${favorite ? 'active' : ''}`}
-          onClick={e => { e.stopPropagation(); toggle(event.id); }}
-          aria-label={favorite ? 'Remover favorito' : 'Adicionar favorito'}
-          title={favorite ? 'Remover favorito' : 'Adicionar favorito'}
-        >
-          {favorite ? '♥' : '♡'}
-        </button>
+        <div className="cardActions">
+          <button
+            className={`rsvpBtn ${attending ? 'active' : ''}`}
+            onClick={e => { e.stopPropagation(); toggleAttendance(event.id); }}
+            aria-label={attending ? 'Cancelar presença' : 'Marcar presença'}
+            aria-pressed={attending}
+            title={attending ? 'Cancelar presença' : 'Marcar presença'}
+          >
+            {attending ? '✓' : '+'}
+          </button>
+          <button
+            className={`favoriteBtn ${favorite ? 'active' : ''}`}
+            onClick={e => { e.stopPropagation(); toggle(event.id); }}
+            aria-label={favorite ? 'Remover favorito' : 'Adicionar favorito'}
+            title={favorite ? 'Remover favorito' : 'Adicionar favorito'}
+          >
+            {favorite ? '♥' : '♡'}
+          </button>
+        </div>
       </div>
 
       <div className="cardClickable" onClick={onClick} role="button" tabIndex={0}

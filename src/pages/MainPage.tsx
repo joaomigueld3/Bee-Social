@@ -7,6 +7,7 @@ import Skeleton from '../components/Card/Skeleton';
 import EventDetail from '../components/EventDetail/EventDetail';
 import Filters, { FilterState, INITIAL_FILTERS } from '../components/Filters/Filters';
 import { allEventsByCity, allEvents } from '../data/events';
+import { useRSVP } from '../context/RSVPContext';
 import { Event } from '../types';
 
 function parseTime(timeStr: string): number {
@@ -33,6 +34,8 @@ export default function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
 
+  const { confirmedEventIds } = useRSVP();
+
   const username = localStorage.getItem('username') ?? '';
 
   useEffect(() => {
@@ -52,9 +55,10 @@ export default function MainPage() {
       if (filters.category !== 'Todos' && ev.category !== filters.category) return false;
       if (filters.price !== 'Todos' && ev.price !== filters.price) return false;
       if (!matchesPeriod(ev.startTime, filters.period)) return false;
+      if (filters.onlyConfirmed && !confirmedEventIds.has(ev.id)) return false;
       return true;
     });
-  }, [cityEvents, filters.search, filters.category, filters.price, filters.period]);
+  }, [cityEvents, filters.search, filters.category, filters.price, filters.period, filters.onlyConfirmed, confirmedEventIds]);
 
   return (
     <div className="mainContainer">

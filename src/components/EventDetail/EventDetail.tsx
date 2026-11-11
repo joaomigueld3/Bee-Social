@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Event } from '../../types';
 import { useFavorites } from '../../context/FavoritesContext';
+import { useRSVP } from '../../context/RSVPContext';
 import './EventDetail.css';
 
 interface EventDetailProps {
@@ -35,6 +36,8 @@ function buildGCalUrl(event: Event): string {
 export default function EventDetail({ event, onClose }: EventDetailProps) {
   const { isFavorite, toggle } = useFavorites();
   const favorite = isFavorite(event.id);
+  const { isAttending, toggleAttendance } = useRSVP();
+  const attending = isAttending(event.id);
   const mapsUrl = buildMapsUrl(event);
   const gCalUrl = buildGCalUrl(event);
 
@@ -112,6 +115,14 @@ export default function EventDetail({ event, onClose }: EventDetailProps) {
               🗺️ Ver no Maps
             </a>
           )}
+          <button
+            type="button"
+            className={`detailActionBtn detailRsvpBtn ${attending ? 'active' : ''}`}
+            onClick={() => toggleAttendance(event.id)}
+            aria-pressed={attending}
+          >
+            {attending ? '✓ Presença Confirmada (Cancelar)' : 'Confirmar Presença'}
+          </button>
           <a className="detailActionBtn" href={gCalUrl} target="_blank" rel="noopener noreferrer">
             📅 Salvar na Agenda
           </a>

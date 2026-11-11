@@ -92,6 +92,49 @@
   color: var(--tag-text);
 }
 
+.badgeAttending {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: #16a34a;
+  color: #fff;
+}
+
+/* --- Card actions --- */
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.rsvpBtn {
+  background: none;
+  border: 1.5px solid var(--border-color);
+  border-radius: 99px;
+  width: 26px;
+  height: 26px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.rsvpBtn:hover {
+  color: #16a34a;
+  border-color: #16a34a;
+}
+
+.rsvpBtn.active {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #fff;
+}
+
 /* --- Favorite button --- */
 .favoriteBtn {
   background: none;

@@ -2,6 +2,7 @@ import './Header.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 import { useFavorites } from '../../context/FavoritesContext';
+import { useRSVP } from '../../context/RSVPContext';
 import arrow from '../../assets/arrow.svg';
 
 interface HeaderProps {
@@ -11,6 +12,7 @@ interface HeaderProps {
 export default function Header({ username }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const { favorites } = useFavorites();
+  const { confirmedCount } = useRSVP();
   const navigate = useNavigate();
 
   function logout() {
@@ -37,6 +39,14 @@ export default function Header({ username }: HeaderProps) {
             <span className="favCount">{favorites.size}</span>
           )}
         </Link>
+        <span
+          className="navLink navRsvp"
+          role="status"
+          aria-label={`${confirmedCount} ${confirmedCount === 1 ? 'presença confirmada' : 'presenças confirmadas'}`}
+        >
+          <span aria-hidden="true">✓ Presenças</span>
+          <span className="rsvpCount" aria-hidden="true">{confirmedCount}</span>
+        </span>
       </nav>
 
       <div className="headerRight">
