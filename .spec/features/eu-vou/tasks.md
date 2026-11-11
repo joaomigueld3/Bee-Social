@@ -8,7 +8,7 @@
 - Arquivos: src/setupTests.ts, src/components/Login/Login.tsx, src/components/Login/Login.css, src/styles/App.css
 - Notas: `beforeEach(() => localStorage.clear())` e stub de `window.matchMedia` no setup; apagar `Login/` e `App.css` (não importados). Pré-requisito das demais.
 
-## T-002 — Contexto de presenças [pendente]
+## T-002 — Contexto de presenças [concluida]
 
 - Refs: US-001, AC-001, AC-002, AC-003
 - Arquivos: src/context/RSVPContext.tsx, src/App.tsx, src/__tests__/RSVPContext.test.tsx
